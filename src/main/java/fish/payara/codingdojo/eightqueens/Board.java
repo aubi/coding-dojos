@@ -59,6 +59,9 @@ public class Board {
     private void solve(int x, int y) {
         positions[x][y] = "Q";
         // TODO: check if this is solution
+        if (checkPosition(x,y)){
+            positions[x][y] = ".";
+        }
         // It can only be the solution if there are the correct number of pieces
         // at the end
         // not conflicting
@@ -71,5 +74,17 @@ public class Board {
         positions[x][y] = ".";
 
         //? solve(x+1, y, solution)
+    }
+
+    private boolean checkPosition(int x, int y){
+        for (int i = 1; i < size; i++){
+            if (positions[x+i][y] == "Q"){
+                return false;
+            }
+            if (positions[x][y+i] == "Q"){
+                return false;
+            }
+        }
+        return true;
     }
 }

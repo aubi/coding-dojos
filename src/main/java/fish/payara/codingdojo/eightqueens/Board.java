@@ -8,6 +8,7 @@ import java.util.List;
  * @author james, kalin, aubi
  */
 public class Board {
+    private static final String QUEEN = "Q";
 
     private int size;
     private int numberOfPieces;
@@ -57,11 +58,14 @@ public class Board {
      * Try new queen on [x,y]
      */
     private void solve(int x, int y) {
-        positions[x][y] = "Q";
-        // TODO: check if this is solution
-        if (checkPosition(x,y)){
-            positions[x][y] = ".";
+        if (y >= size || x >= size) {
+            return; // we are at the end
         }
+        // TODO: check if this is solution
+        if (!checkPosition(x, y)) {
+            return; // cut branch
+        }
+        positions[x][y] = QUEEN;
         // It can only be the solution if there are the correct number of pieces
         // at the end
         // not conflicting
@@ -78,10 +82,10 @@ public class Board {
 
     private boolean checkPosition(int x, int y){
         for (int i = 1; i < size; i++){
-            if (positions[x+i][y] == "Q"){
+            if (positions[x - i][y - i] == QUEEN) {
                 return false;
             }
-            if (positions[x][y+i] == "Q"){
+            if (positions[x + i][y + i] == QUEEN) {
                 return false;
             }
         }

@@ -58,8 +58,11 @@ public class Board {
      * Try new queen on [x,y]
      */
     private void solve(int x, int y) {
-        if (y >= size || x >= size) {
-            return; // we are at the end
+        if (y >= size) {
+            return; // We have a solution
+        }
+        if (x >= size) {
+            return; //Just continue looking
         }
         // TODO: check if this is solution
         if (!checkPosition(x, y)) {
@@ -77,18 +80,28 @@ public class Board {
         // cleanup
         positions[x][y] = ".";
 
-        //? solve(x+1, y, solution)
+        solve(x+1, y);
     }
 
     private boolean checkPosition(int x, int y){
         for (int i = 1; i < size; i++){
-            if (positions[x - i][y - i] == QUEEN) {
+            if (getPosition(x-i, y-i) == QUEEN) {
                 return false;
             }
-            if (positions[x + i][y + i] == QUEEN) {
+            if (positions[x + i][y - i] == QUEEN) {
                 return false;
             }
         }
         return true;
+    }
+
+    private String getPosition(int x, int y) {
+        if (x < 0 || x >= size) {
+            return ".";
+        }
+        if (y < 0 || y >= size) {
+            return ".";
+        }
+        return positions[x][y];
     }
 }

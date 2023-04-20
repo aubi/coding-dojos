@@ -11,4 +11,12 @@ public class EightQueensTest {
         assertTrue(true);
     }
 
+    @Test
+    public void testBoard() {
+        Board board = new Board();
+        assertTrue(board.getSize() == 64);
+        assertTrue(board.getNumberOfPieces() == 8);
+        
+    }
+
 }

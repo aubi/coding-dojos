@@ -9,3 +9,6 @@ People work TOGETHER on one problem, one code sandbox. One person starts coding,
 Everybody is allowed to do ANYTHING, including deleting all code etc.
 
 The task is to solve the problem.
+
+= Payara 20. 4. 2023
+Eight Queens

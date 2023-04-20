@@ -88,7 +88,7 @@ public class Board {
             if (getPosition(x-i, y-i) == QUEEN) {
                 return false;
             }
-            if (positions[x + i][y - i] == QUEEN) {
+            if (getPosition(x + i,y - i) == QUEEN) {
                 return false;
             }
         }

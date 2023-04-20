@@ -12,6 +12,7 @@ public class Board {
     private int size;
     private int numberOfPieces;
     private String[][] positions;
+    private List<String> solutions;
 
     public Board(int size) {
         this.size = size;
@@ -34,13 +35,14 @@ public class Board {
                 positions[x][y] = ".";
             }
         }
-        List<String> solutions = new ArrayList<>();
-        solve(0, 0, solutions);
+        solutions = new ArrayList<>();
+
+        solve(0, 0);
 
 //        for (int i = 0; i < getSize(); i++) {
 //            positions[random.nextInt(getSize())] = "Q";
 //        }
-        return null;
+        return solutions;
     }
 
     @Override
@@ -54,15 +56,16 @@ public class Board {
     /**
      * Try new queen on [x,y]
      */
-    private void solve(int x, int y, List<String> solutions) {
+    private void solve(int x, int y) {
         positions[x][y] = "Q";
         // TODO: check if this is solution
+        // It can only be the solution if there are the correct number of pieces
         // at the end
         // not conflicting
         // add to solution
 
         // TODO: try next line
-        solve(0, y + 1, solutions);
+        solve(0, y + 1);
 
         // cleanup
         positions[x][y] = ".";

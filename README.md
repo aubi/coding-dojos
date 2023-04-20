@@ -12,3 +12,5 @@ The task is to solve the problem.
 
 = Payara 20. 4. 2023
 Eight Queens
+
+Do not write ALL tests first! You don't know the domain enough.

@@ -1,10 +1,9 @@
 package fish.payara.codingdojo.eightqueens;
 
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 public class EightQueensTest {
 
@@ -38,10 +37,11 @@ public class EightQueensTest {
 
         List<String> solutions = board.getAllSolutions();
 
-        assertEquals("[.Q..]\n"
+        assertTrue(solutions.contains(
+                "[.Q..]\n"
                 + "[...Q]\n"
                 + "[Q...]\n"
-                + "[..Q.]", solutions.get(0));
+                + "[..Q.]\n"));
     }
 
 }

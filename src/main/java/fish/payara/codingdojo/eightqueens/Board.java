@@ -2,6 +2,7 @@ package fish.payara.codingdojo.eightqueens;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -54,31 +55,40 @@ public class Board {
         return "";
     }
 
+    public static void main(String[] args) {
+        Board board = new Board(4);
+
+        List<String> solutions = board.getAllSolutions();
+
+        System.out.println(solutions.stream().collect(Collectors.joining("\n\n")));
+
+    }
     /**
      * Try new queen on [x,y]
      */
     private void solve(int x, int y) {
         if (y >= size) {
+            addSolution();
             return; // We have a solution
         }
         if (x >= size) {
             return; //Just continue looking
         }
         // TODO: check if this is solution
-        if (!checkPosition(x, y)) {
-            return; // cut branch
+        if (checkPosition(x, y)) {
+            // viable partial solution
+            positions[x][y] = QUEEN;
+            // It can only be the solution if there are the correct number of pieces
+            // at the end
+            // not conflicting
+            // add to solution
+
+            // TODO: try next line
+            solve(0, y + 1);
+
+            // cleanup
+            positions[x][y] = ".";
         }
-        positions[x][y] = QUEEN;
-        // It can only be the solution if there are the correct number of pieces
-        // at the end
-        // not conflicting
-        // add to solution
-
-        // TODO: try next line
-        solve(0, y + 1);
-
-        // cleanup
-        positions[x][y] = ".";
 
         solve(x+1, y);
     }
@@ -88,7 +98,10 @@ public class Board {
             if (getPosition(x-i, y-i) == QUEEN) {
                 return false;
             }
-            if (getPosition(x + i,y - i) == QUEEN) {
+            if (getPosition(x, y - i) == QUEEN) {
+                return false;
+            }
+            if (getPosition(x + i, y - i) == QUEEN) {
                 return false;
             }
         }
@@ -103,5 +116,17 @@ public class Board {
             return ".";
         }
         return positions[x][y];
+    }
+
+    private void addSolution() {
+        StringBuilder sol = new StringBuilder();
+        for (int x = 0; x < size; x++) {
+            sol.append("[");
+            for (int y = 0; y < size; y++) {
+                sol.append(positions[x][y]);
+            }
+            sol.append("]\n");
+        }
+        solutions.add(sol.toString());
     }
 }

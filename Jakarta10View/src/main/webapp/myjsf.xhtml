@@ -13,6 +13,14 @@
         <h:commandButton value="Calculate" action="#{sampleBean.calculate}" id="calcbutton"/>
         #{sampleBean.result}
     </h:form>
+
+    <h:form id="tableform">
+        <h:dataTable id="datatable" value="#{tableBean.tableData}" var="iterator">
+            <h:column id="datacolumn">
+                <h:outputText value="#{iterator}" escape="true"/>
+            </h:column>
+        </h:dataTable>
+    </h:form>
 </h:body>
 </html>
 

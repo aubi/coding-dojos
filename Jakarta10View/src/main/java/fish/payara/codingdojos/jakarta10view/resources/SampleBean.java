@@ -1,12 +1,21 @@
 package fish.payara.codingdojos.jakarta10view.resources;
 
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 
+import java.io.Serializable;
+
 @Named("sampleBean")
-public class SampleBean {
+@SessionScoped
+public class SampleBean implements Serializable {
     String name = "James";
     int numberOne;
     int numberTwo;
+    int result;
+
+    public void calculate(){
+        result = numberOne + numberTwo;
+    }
 
     public String getName() {
         return name;
@@ -30,5 +39,9 @@ public class SampleBean {
 
     public void setNumberTwo(int numberTwo) {
         this.numberTwo = numberTwo;
+    }
+
+    public int getResult() {
+        return result;
     }
 }

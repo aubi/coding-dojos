@@ -7,7 +7,12 @@
 </h:head>
 <h:body>
     Hello from Payara's Coding Dojo 2 #{sampleBean.name}!
-    <h:inputText value="#{sampleBean.numberOne}"/>
+    <h:form id="form">
+        <h:inputText value="#{sampleBean.numberOne}" id="numberone"/>
+        <h:inputText value="#{sampleBean.numberTwo}" id="numbertwo"/>
+        <h:commandButton value="Calculate" action="#{sampleBean.calculate}" id="calcbutton"/>
+        #{sampleBean.result}
+    </h:form>
 </h:body>
 </html>
 

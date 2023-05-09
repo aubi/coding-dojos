@@ -1,8 +1,8 @@
 = Payara 9. 5. 2023
 JakartaEE View stack
 
-* create and build Jakarta EE project
-* make static page (something we know it works!)
+* create and build Jakarta EE project - DONE
+* make static page (something we know it works!) - DONE
 * make rest ping (simply return "pong")
 * make servlet
 * make JSP with a for-cycle (write a message 10 times)

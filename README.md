@@ -14,3 +14,4 @@ The people with verified access:
 - James
 - Kalin
 - Simon
+- Felix

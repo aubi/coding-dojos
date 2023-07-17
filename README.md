@@ -16,3 +16,4 @@ The people with verified access:
 - Simon
 - Felix
 - Alfonso
+- Rohan

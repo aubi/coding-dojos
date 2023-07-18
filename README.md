@@ -19,3 +19,4 @@ The people with verified access:
 - Rohan
 - Raushan
 - Arie
+- Gaurav

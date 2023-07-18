@@ -13,6 +13,6 @@ public class MyServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().write("Hello! Coding Dojo");
+        resp.getWriter().print("Hello! Coding Dojo");
     }
 }

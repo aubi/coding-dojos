@@ -19,3 +19,5 @@ The people with verified access:
 - Rohan
 - Raushan
 - Shubham
+- Arie
+- Gaurav

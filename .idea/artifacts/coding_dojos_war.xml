@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="coding-dojos:war">
+    <output-path>$PROJECT_DIR$/coding-dojo/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>coding-dojos</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="coding-dojo.war">
+      <element id="artifact" artifact-name="coding-dojos:war exploded" />
+    </root>
+  </artifact>
+</component>

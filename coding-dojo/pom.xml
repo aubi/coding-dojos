@@ -5,7 +5,7 @@
     <artifactId>coding-dojo</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>coding-dojo Maven Webapp</name>
+    <!--<name>coding-dojo Maven Webapp</name>-->
     <url>http://maven.apache.org</url>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -26,7 +26,7 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-    <build>
+<!--    <build>
         <finalName>coding-dojo</finalName>
-    </build>
+    </build>-->
 </project>

@@ -18,3 +18,4 @@ The people with verified access:
 - Alfonso
 - Rohan
 - Raushan
+- Arie

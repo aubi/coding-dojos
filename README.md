@@ -22,3 +22,4 @@ The people with verified access:
 - Arie
 - Gaurav
 - Ramya
+- Luís Neto

@@ -12,6 +12,16 @@ url: jdbc:postgresql://home.aubrecht.net:15432/dvdrental
 user: payara
 password: codingDojoExample
 
+Here are the commands you can use to create the JDBC Resources:
+
+    asadmin create-jdbc-connection-pool --datasourceClassname=org.postgresql.ds.PGSimpleDataSource --resType=javax.sql.DataSource dvdrentalPool
+
+    asadmin set resources.jdbc-connection-pool.dvdrentalPool.property.User=payara resources.jdbc-connection-pool.dvdrentalPool.property.URL=jdbc:postgresql://home.aubrecht.net:15432/dvdrental resources.jdbc-connection-pool.dvdrentalPool.property.Password=codingDojoExample
+
+    asadmin ping-connection-pool dvdrentalPool
+
+    asadmin create-jdbc-resource --enabled=true --poolName=dvdrentalPool --target=domain jdbc/dvdrental
+
 I suggest to have some tool to access the database, e.g. DBeaver, https://dbeaver.io/
 
 

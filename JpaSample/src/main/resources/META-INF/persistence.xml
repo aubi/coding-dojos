@@ -3,7 +3,7 @@
     <!-- Define Persistence Unit -->
     <persistence-unit name="pu1" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <jta-data-source>jdbc/dvdrental</jta-data-source>
+        <jta-data-source>jdbc/dvdRental</jta-data-source>
         <properties>
             <property name="eclipselink.logging.level" value="FINE"/>
             <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>

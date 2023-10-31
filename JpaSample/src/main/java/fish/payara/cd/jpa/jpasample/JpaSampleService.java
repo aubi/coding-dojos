@@ -4,10 +4,16 @@
  */
 package fish.payara.cd.jpa.jpasample;
 
+import fish.payara.cd.jpa.domain.Actor;
 import jakarta.ejb.Stateless;
 import jakarta.ejb.LocalBean;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceUnit;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
+
+import java.util.List;
 
 /**
  *
@@ -20,8 +26,9 @@ public class JpaSampleService {
     @PersistenceUnit
     private EntityManager em;
 
-    public String loadJpaData() {
-        return "TODO";
-//        em.createNamedQuery("XYZ", XYZ.class)...
+    public List<Actor> loadJpaData() {
+        TypedQuery<Actor> queryActorFindAll = em.createNamedQuery("Actor.findAll", Actor.class);
+
+        return queryActorFindAll.getResultList();
     }
 }

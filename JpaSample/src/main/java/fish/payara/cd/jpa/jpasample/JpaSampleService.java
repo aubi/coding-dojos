@@ -16,7 +16,6 @@ import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 /**
- *
  * @author aubi
  */
 @Stateless
@@ -31,4 +30,6 @@ public class JpaSampleService {
 
         return queryActorFindAll.getResultList();
     }
+
+
 }

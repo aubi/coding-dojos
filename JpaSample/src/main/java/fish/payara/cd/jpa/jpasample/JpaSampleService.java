@@ -7,10 +7,8 @@ package fish.payara.cd.jpa.jpasample;
 import fish.payara.cd.jpa.domain.Actor;
 import jakarta.ejb.Stateless;
 import jakarta.ejb.LocalBean;
-import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceUnit;
-import jakarta.persistence.Query;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
@@ -22,13 +20,14 @@ import java.util.List;
 @LocalBean
 public class JpaSampleService {
 
-    @PersistenceUnit
+    @PersistenceContext
     private EntityManager em;
 
     public List<Actor> loadJpaData() {
         TypedQuery<Actor> queryActorFindAll = em.createNamedQuery("Actor.findAll", Actor.class);
+        List<Actor> actors = queryActorFindAll.getResultList();
 
-        return queryActorFindAll.getResultList();
+        return actors;
     }
 
 

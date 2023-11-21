@@ -4,7 +4,12 @@
  */
 package fish.payara.cd.jpa.quickjakartaee.controller;
 
+import fish.payara.cd.jpa.quickjakartaee.entity.Film;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import java.util.List;
 
 /**
  *
@@ -12,5 +17,12 @@ import jakarta.ejb.Stateless;
  */
 @Stateless
 public class FilmController {
+    
+    @PersistenceContext
+    public EntityManager manager;
+    
+    public List<Film> listOfFilms() {
+        return manager.createNamedQuery("Film.findAll", Film.class).getResultList();
+    }  
 
 }

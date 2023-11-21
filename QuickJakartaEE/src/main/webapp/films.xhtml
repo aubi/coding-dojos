@@ -10,7 +10,7 @@
         <h1>List of films</h1>
         
         <h:form>
-            <h:dataTable value="#{FIXME}" var="item">
+            <h:dataTable value="#{filmsBean.findAll()}" var="item">
                 <h:column>
                     <f:facet name="header">Name</f:facet>
                     #{item.title}

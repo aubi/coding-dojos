@@ -1,5 +1,7 @@
 package fish.payara.cd.jpa.quickjakartaee.resources;
 
+import fish.payara.cd.jpa.quickjakartaee.controller.FilmController;
+import jakarta.ejb.EJB;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
@@ -8,13 +10,16 @@ import jakarta.ws.rs.core.Response;
  *
  * @author 
  */
-@Path("ping")
-public class JakartaEE10Resource {
+@Path("film")
+public class FilmResource {
+
+    @EJB
+    private FilmController filmController;
     
     @GET
-    public Response ping(){
+    public Response findAll(){
         return Response
-                .ok("Ping from Jakarta EE succeeded!")
+                .ok(filmController.listOfFilms())
                 .build();
     }
 }

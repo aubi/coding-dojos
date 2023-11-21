@@ -47,8 +47,8 @@ public class Language implements Serializable {
     @Column(name = "last_update")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "languageId")
-    private Collection<Film> filmCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "languageId")
+//    private Collection<Film> filmCollection;
 
     public Language() {
     }
@@ -87,13 +87,13 @@ public class Language implements Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-    public Collection<Film> getFilmCollection() {
-        return filmCollection;
-    }
-
-    public void setFilmCollection(Collection<Film> filmCollection) {
-        this.filmCollection = filmCollection;
-    }
+//    public Collection<Film> getFilmCollection() {
+//        return filmCollection;
+//    }
+//
+//    public void setFilmCollection(Collection<Film> filmCollection) {
+//        this.filmCollection = filmCollection;
+//    }
 
     @Override
     public int hashCode() {

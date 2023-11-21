@@ -39,8 +39,7 @@ import jakarta.persistence.TemporalType;
     @NamedQuery(name = "Film.findByLength", query = "SELECT f FROM Film f WHERE f.length = :length"),
     @NamedQuery(name = "Film.findByReplacementCost", query = "SELECT f FROM Film f WHERE f.replacementCost = :replacementCost"),
     @NamedQuery(name = "Film.findByRating", query = "SELECT f FROM Film f WHERE f.rating = :rating"),
-    @NamedQuery(name = "Film.findByLastUpdate", query = "SELECT f FROM Film f WHERE f.lastUpdate = :lastUpdate"),
-    @NamedQuery(name = "Film.findBySpecialFeatures", query = "SELECT f FROM Film f WHERE f.specialFeatures = :specialFeatures")})
+    @NamedQuery(name = "Film.findByLastUpdate", query = "SELECT f FROM Film f WHERE f.lastUpdate = :lastUpdate")})
 public class Film implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -74,12 +73,12 @@ public class Film implements Serializable {
     @Column(name = "last_update")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdate;
-    @Column(name = "special_features")
-    private Serializable specialFeatures;
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "fulltext")
-    private Object fulltext;
+//    @Column(name = "special_features")
+//    private Serializable specialFeatures;
+//    @Basic(optional = false)
+//    @Lob
+//    @Column(name = "fulltext")
+//    private Object fulltext;
     @JoinColumn(name = "language_id", referencedColumnName = "language_id")
     @ManyToOne(optional = false)
     private Language languageId;
@@ -98,7 +97,7 @@ public class Film implements Serializable {
         this.rentalRate = rentalRate;
         this.replacementCost = replacementCost;
         this.lastUpdate = lastUpdate;
-        this.fulltext = fulltext;
+//        this.fulltext = fulltext;
     }
 
     public Integer getFilmId() {
@@ -181,21 +180,21 @@ public class Film implements Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-    public Serializable getSpecialFeatures() {
-        return specialFeatures;
-    }
+//    public Serializable getSpecialFeatures() {
+//        return specialFeatures;
+//    }
+//
+//    public void setSpecialFeatures(Serializable specialFeatures) {
+//        this.specialFeatures = specialFeatures;
+//    }
 
-    public void setSpecialFeatures(Serializable specialFeatures) {
-        this.specialFeatures = specialFeatures;
-    }
-
-    public Object getFulltext() {
-        return fulltext;
-    }
-
-    public void setFulltext(Object fulltext) {
-        this.fulltext = fulltext;
-    }
+//    public Object getFulltext() {
+//        return fulltext;
+//    }
+//
+//    public void setFulltext(Object fulltext) {
+//        this.fulltext = fulltext;
+//    }
 
     public Language getLanguageId() {
         return languageId;

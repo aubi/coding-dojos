@@ -19,9 +19,9 @@ The people with verified access:
 - Rohan
 - Raushan
 - Shubham
-- Arie
 - Gaurav
 - Ramya
 - Luís Neto
 - Ilias Efstathiou
 - Marcelo
+- Arie

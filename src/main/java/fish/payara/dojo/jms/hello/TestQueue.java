@@ -6,6 +6,7 @@ package fish.payara.dojo.jms.hello;
 
 import jakarta.ejb.ActivationConfigProperty;
 import jakarta.ejb.MessageDriven;
+import jakarta.inject.Inject;
 import jakarta.jms.Message;
 import jakarta.jms.MessageListener;
 
@@ -15,9 +16,13 @@ import jakarta.jms.MessageListener;
 })
 public class TestQueue implements MessageListener {
 
+    @Inject
+    TopicCounter topicCounter;
+
     @Override
     public void onMessage(Message message) {
         System.out.println("Hello queue");
+        topicCounter.countMessage();
     }
 
 }

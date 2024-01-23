@@ -2,6 +2,8 @@ package fish.payara.dojo.jms.hello;
 
 import jakarta.ejb.EJB;
 import jakarta.inject.Inject;
+import jakarta.jms.JMSConnectionFactoryDefinition;
+import jakarta.jms.JMSDestinationDefinition;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,6 +13,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/counter")
+@JMSConnectionFactoryDefinition(name = "jms/TestFactory")
+@JMSDestinationDefinition(name = "jms/TestQueue", destinationName = "TestQueue", interfaceName = "jakarta.jms.Queue")
 public class CounterServlet extends HttpServlet {
 
     @EJB

@@ -1,6 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html">
+    <h:head>
         <title>Welcome to Payara</title>
 
         <style>
@@ -13,8 +15,8 @@
                 color: white;
             }
         </style>
-    </head>
-    <body>
+    </h:head>
+    <h:body>
 
 
         <h1>Greetings from Payara!</h1>
@@ -22,13 +24,17 @@
             Thank you for visiting <a href="https://www.payara.fish/">Payara</a>! We're thrilled to have you here. Payara is your go-to destination for all things Jakarta EE and Java enterprise applications.
         </p>
         <p>
-            <a href="https://www.payara.fish/"><img width="50%" src="images/payara-fish-logo.svg" alt="Payara Logo"></a>
+            <a href="https://www.payara.fish/"><img width="50%" src="images/payara-fish-logo.svg" alt="Payara Logo" /></a>
         </p>
-
+        <h:form>
+        <p>
+            Counter: - <h:outputText value="#{counterBean.count}" /> -
+        </p>
+        </h:form>
         <h2>RESTful Service</h2>
         <p>
-            The REST end-point is available at <a href="resources/hello">resources/hello</a>.
-            You can supply a name to the end-point using a query parameter like this: <a href="resources/hello?name=John">resources/hello?name=John</a>
+            The REST end-point is available at <a href="api/hello">api/hello</a>.
+            You can supply a name to the end-point using a query parameter like this: <a href="api/hello?name=John">api/hello?name=John</a>
         </p>
 
         
@@ -41,5 +47,5 @@
         <p>
             Explore the incredible features of Payara, from seamless clustering to unparalleled support. Get started on your journey with Payara by checking out our <a href="https://www.payara.fish/documentation">documentation</a>.
         </p>
-    </body>
+    </h:body>
 </html>

@@ -8,11 +8,16 @@ import java.util.concurrent.atomic.AtomicLong;
 @Stateless
 public class TopicCounter {
 
-    private static final AtomicLong COUNTER = new AtomicLong();
+    private static final AtomicLong COUNTER = new AtomicLong(0);
     private static final CountDownLatch countDownTimer = new CountDownLatch(5);
+
     public long countMessage() {
         countDownTimer.countDown();
         return COUNTER.incrementAndGet();
+    }
+
+    public long checkCounter() {
+        return COUNTER.get();
     }
 
 }

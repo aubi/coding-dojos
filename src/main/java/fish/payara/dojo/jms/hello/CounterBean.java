@@ -5,13 +5,15 @@
 package fish.payara.dojo.jms.hello;
 
 import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 
 /**
  *
  * @author aubi
  */
-@Named
+@Named("counterBean")
+@RequestScoped
 public class CounterBean {
     @EJB
     private TopicCounter counter;

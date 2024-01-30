@@ -10,6 +10,9 @@ import jakarta.ws.rs.core.Response;
 @Path("hello")
 public class HelloWorldResource {
 
+    @Inject
+    TestClient testClient;
+
     @GET
     public Response hello(@QueryParam("name") String name) {
         if ((name == null) || name.trim().isEmpty()) {
@@ -29,6 +32,10 @@ public class HelloWorldResource {
         return processingManager.expensiveComputation(number);
     }
 
-    
+    @GET
+    @Path("sendMessage")
+    public void setMessage(@QueryParam("message") String msg) {
+        testClient.sendMessage(msg);
+    }
         
 }

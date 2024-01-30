@@ -17,6 +17,7 @@
         <cargo.version>1.10.7</cargo.version>
         <payara.url>https://repo1.maven.org/maven2/fish/payara/distributions/payara/6.2024.1/payara-6.2024.1.zip</payara.url>
         <payara.home>payara6</payara.home>
+        <blinky.version>0.54.1</blinky.version>
     </properties>
     
     <dependencyManagement>
@@ -47,6 +48,11 @@
             <groupId>fish.payara.api</groupId>
             <artifactId>payara-api</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>fish.payara.cloud.ui</groupId>
+            <artifactId>blinky</artifactId>
+            <version>${blinky.version}</version>
         </dependency>
     </dependencies>
 

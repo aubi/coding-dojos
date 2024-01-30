@@ -4,19 +4,28 @@
       xmlns:h="jakarta.faces.html">
     <h:head>
         <title>Welcome to Payara</title>
+        <link rel="stylesheet" href="${request.contextPath}/blinky/ui/css/payara.css" type="text/css" media="all"/>
 
         <style>
-            body {
+            /* body {
                 background-image: linear-gradient(rgba(0,44,62), rgba(0,44,62,.8), rgba(0,44,62));
                 color: #fff;
             }
             a {
                 font-weight: bold;
                 color: white;
-            }
+            } */
         </style>
     </h:head>
-    <h:body>
+    <h:body class="page theme--light">
+        <div class="page__main">
+            <div class="page__content">
+                <div class="page__content-inner">
+
+
+                    <div class="cards">
+                        <div class="card">
+
         <h1>Greetings from Payara!</h1>
         
         <p><a href="resources/hello/uuids">UUIDS</a></p>
@@ -44,5 +53,15 @@
         <p>
             Explore the incredible features of Payara, from seamless clustering to unparalleled support. Get started on your journey with Payara by checking out our <a href="https://www.payara.fish/documentation">documentation</a>.
         </p>
+
+
+
+
+                        </div><!-- .card -->
+                    </div><!-- .cards -->
+
+                </div><!-- .page__content-inner -->
+            </div><!-- .page__content -->
+        </div><!-- .page__main -->
     </h:body>
 </html>

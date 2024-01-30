@@ -1,5 +1,7 @@
 package fish.payara.hello;
 
+import jakarta.inject.Inject;
+import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.QueryParam;
@@ -7,7 +9,6 @@ import jakarta.ws.rs.core.Response;
 
 @Path("hello")
 public class HelloWorldResource {
-
 
     @GET
     public Response hello(@QueryParam("name") String name) {
@@ -17,6 +18,15 @@ public class HelloWorldResource {
         return Response
                 .ok(name)
                 .build();
+    }
+
+    @Inject
+    ProcessingManager processingManager;
+
+    @GET
+    @Path("uuids")
+    public String uuids(@QueryParam("number") @DefaultValue("1") int number) {
+        return processingManager.expensiveComputation(number);
     }
 
     

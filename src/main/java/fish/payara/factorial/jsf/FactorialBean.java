@@ -24,6 +24,7 @@ public class FactorialBean {
     @Inject
     FactorialService factorialService;
 
+
     /**
      * Creates a new instance of FactorialBean
      */
@@ -39,6 +40,18 @@ public class FactorialBean {
 
         this.setOutputs(builder.toString());
     }
+
+    public void calculateParallel() {
+        StringBuilder builder = new StringBuilder();
+
+        for (String s : factorialService.calculateParallelFactorial(input)) {
+            builder.append(s);
+        }
+
+        this.setOutputs(builder.toString());
+    }
+
+
 
     public String getInput() {
         return input;

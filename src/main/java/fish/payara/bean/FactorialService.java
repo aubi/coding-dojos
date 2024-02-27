@@ -1,18 +1,22 @@
 package fish.payara.bean;
 
 import jakarta.annotation.Resource;
+import jakarta.enterprise.concurrent.ManagedExecutorDefinition;
 import jakarta.enterprise.concurrent.ManagedExecutorService;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+@ManagedExecutorDefinition(name = "java:app/myMES", maxAsync = 2)
 
 public class FactorialService {
 
-    @Resource
+    @Resource(lookup = "java:app/myMES")
     private ManagedExecutorService mes;
-    
+
+
     public List<String> makeFactorial(String input) {
         String[] inputs = input.split(",");
         List<String> result = new ArrayList<>();
@@ -32,18 +36,25 @@ public class FactorialService {
         long start = System.currentTimeMillis();
         String[] inputs = input.split(",");
         List<String> result = new ArrayList<>();
+        List<Future<BigInteger>> futures = new ArrayList<>();
         for (String string : inputs) {
-
-            Future<Integer> output = mes.submit(() -> {
+            futures.add(mes.submit(() -> {
                 int value = Integer.parseInt(string);
-                int total = 1;
+                BigInteger total = BigInteger.ONE;
                 for (int x = 1; x <= value; x++) {
-                    total = total * x;
+                    total = total.multiply(BigInteger.valueOf(x));
                 }
                 return total;
-            });
-            result.add(String.valueOf(output.get()));
+            }));
         }
+
+        futures.forEach(integerFuture -> {
+            try {
+                result.add(String.valueOf(integerFuture.get()));
+            } catch (InterruptedException | ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        });
         long end = System.currentTimeMillis();
         result.add(" ");
         result.add(end-start+"ms");

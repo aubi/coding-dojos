@@ -6,6 +6,10 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <h:form>
+            <p>Input: <h:inputText value="#{factorialBean.input}"/></p>
+            <p><h:commandButton value="#{factorialBean.calculate()}"/></p>
+            
+        </h:form>
     </h:body>
 </html>

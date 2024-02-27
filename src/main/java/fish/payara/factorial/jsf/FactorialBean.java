@@ -4,6 +4,9 @@
  */
 package fish.payara.factorial.jsf;
 
+import fish.payara.bean.FactorialService;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.Dependent;
 import java.util.List;
@@ -13,11 +16,14 @@ import java.util.List;
  * @author aubi
  */
 @Named(value = "factorialBean")
-@Dependent
+@RequestScoped
 public class FactorialBean {
 
     private String input;
     private List<String> outputs;
+
+    @Inject
+    FactorialService factorialService;
 
     /**
      * Creates a new instance of FactorialBean
@@ -26,7 +32,8 @@ public class FactorialBean {
     }
 
     public void calculate() {
-        input = ":-)" + input;
+        factorialService.makeFactorial(input);
+
     }
 
     public String getInput() {

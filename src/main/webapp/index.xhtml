@@ -8,8 +8,9 @@
     <h:body>
         <h:form>
             <p>Input: <h:inputText value="#{factorialBean.input}"/></p>
-            <p><h:commandButton value="#{factorialBean.calculate()}"/></p>
-            
+            <p><h:commandButton value="Calculate" action="#{factorialBean.calculate()}"/></p>
+            <p>Output: <h:outputText value="#{factorialBean.outputs}"/></p>
+
         </h:form>
     </h:body>
 </html>

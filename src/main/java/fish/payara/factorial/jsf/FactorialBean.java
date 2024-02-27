@@ -10,6 +10,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.Dependent;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  *
@@ -41,7 +42,7 @@ public class FactorialBean {
         this.setOutputs(builder.toString());
     }
 
-    public void calculateParallel() {
+    public void calculateParallel() throws ExecutionException, InterruptedException {
         StringBuilder builder = new StringBuilder();
 
         for (String s : factorialService.calculateParallelFactorial(input)) {

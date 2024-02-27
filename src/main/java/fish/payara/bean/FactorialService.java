@@ -12,7 +12,7 @@ public class FactorialService {
         for (String string : inputs) {
             int value = Integer.parseInt(string);
             int total = 1;
-            for (int x =1; x < value; x++){
+            for (int x = 1; x <= value; x++){
                 total = total * x;
             }
             result.add(total + "");

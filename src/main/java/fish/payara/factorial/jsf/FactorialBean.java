@@ -20,8 +20,7 @@ import java.util.List;
 public class FactorialBean {
 
     private String input;
-    private List<String> outputs;
-
+    private String outputs;
     @Inject
     FactorialService factorialService;
 
@@ -32,8 +31,13 @@ public class FactorialBean {
     }
 
     public void calculate() {
-        factorialService.makeFactorial(input);
+        StringBuilder builder = new StringBuilder();
 
+        for (String s : factorialService.makeFactorial(input)) {
+            builder.append(s);
+        }
+
+        this.setOutputs(builder.toString());
     }
 
     public String getInput() {
@@ -44,12 +48,11 @@ public class FactorialBean {
         this.input = input;
     }
 
-    public List<String> getOutputs() {
+    public String getOutputs() {
         return outputs;
     }
 
-    public void setOutputs(List<String> outputs) {
+    public void setOutputs(String outputs) {
         this.outputs = outputs;
     }
-
 }

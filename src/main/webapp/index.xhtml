@@ -6,8 +6,14 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
-    <h:outputLabel value="#{concurrentService.printValue()}"/>
-
-<h:commandButton value="Cancel" actionListener="#{concurrentService.stop()}"/>
+    <h:form>
+        <h:outputLabel value="#{concurrentService.printValue()}"/>
+        <br></br>
+        <h:commandButton value="Stop" actionListener="#{concurrentService.stop()}"/>
+        <br></br>
+        <h:commandButton value="Start" actionListener="#{concurrentService.start()}"/>
+        <br></br>
+        <h:commandButton value="Reset Count" actionListener="#{concurrentService.reset()}"/>
+    </h:form>
 </f:view>
 </html>

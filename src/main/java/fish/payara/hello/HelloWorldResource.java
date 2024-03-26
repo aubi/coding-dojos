@@ -23,6 +23,9 @@ public class HelloWorldResource {
     @ConfigProperty(name = "defaultName", defaultValue = "world")
     private String defaultName;
 
+    @Inject
+    private ConcurrentService concurrentService;
+
     @GET
     @Operation(summary = "Get a personalized greeting")
     @APIResponses(value = {

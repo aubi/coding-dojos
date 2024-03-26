@@ -16,7 +16,7 @@ public class ConcurrentService {
     @PostConstruct
     void init() {
         mes.schedule(() -> {
-            System.out.println("Running currently. Count --> " + count.incrementAndGet());
+            System.out.println("##################### Running currently. Count --> " + count.incrementAndGet());
         }, 1, TimeUnit.SECONDS);
     }
 }

@@ -15,9 +15,9 @@ public class ConcurrentService {
     final AtomicInteger count = new AtomicInteger();
     @PostConstruct
     void init() {
-        mes.schedule(() -> {
+        mes.scheduleAtFixedRate(() -> {
             System.out.println("##################### Running currently. Count --> " + count.incrementAndGet());
-        }, 1, TimeUnit.SECONDS);
+        }, 0, 1, TimeUnit.SECONDS);
     }
 
     public AtomicInteger printValue() {

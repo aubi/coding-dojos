@@ -1,5 +1,6 @@
 package fish.payara.hello;
 
+import jakarta.ejb.Schedule;
 import jakarta.ejb.Singleton;
 
 import java.io.BufferedReader;
@@ -11,8 +12,11 @@ import java.net.URL;
 @Singleton
 public class DownloadService {
 
+    private String joke;
 
-    public String joke() throws IOException {
+
+    @Schedule(second = "*/2", hour = "*", minute = "*")
+    public void joke() throws IOException {
         HttpURLConnection request = createRequest();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(request.getInputStream()));
@@ -23,7 +27,12 @@ public class DownloadService {
         }
         in.close();
         request.disconnect();
-        return content.toString();
+        joke = joke + content.toString();
+    }
+
+    public String getJoke() {
+
+        return joke;
     }
 
     private HttpURLConnection createRequest() throws IOException {

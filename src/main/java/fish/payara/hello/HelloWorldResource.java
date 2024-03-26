@@ -66,6 +66,6 @@ public class HelloWorldResource {
     @GET
     @Path("joke")
     public String printJoke() throws IOException {
-        return downloadService.joke();
+        return downloadService.getJoke();
     }
 }

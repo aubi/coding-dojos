@@ -22,20 +22,21 @@ public class ConcurrentService {
         scheduledFuture = mes.scheduleAtFixedRate(() -> {
             System.out.println("##################### Running concurrently. Count --> " + count.incrementAndGet());
         }, 0, 1, TimeUnit.SECONDS);
-
     }
 
-    public AtomicInteger printValue() {
-        return count;
+    public int getCount() {
+        return count.get();
     }
 
     public void stop() {
         if (scheduledFuture != null) {
             scheduledFuture.cancel(true);
+            scheduledFuture = null;
         }
     }
 
     public void start() {
+        stop();
         scheduledFuture = mes.scheduleAtFixedRate(() -> {
             System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ Running concurrently after restarting. Count --> " + count.incrementAndGet());
         }, 0, 1, TimeUnit.SECONDS);
@@ -43,5 +44,9 @@ public class ConcurrentService {
 
     public void reset() {
         count.set(0);
+    }
+
+    public boolean isScheduled() {
+        return scheduledFuture != null;
     }
 }

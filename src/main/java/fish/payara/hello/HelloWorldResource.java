@@ -17,7 +17,6 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Path("hello")
 public class HelloWorldResource {
@@ -48,7 +47,7 @@ public class HelloWorldResource {
             name = defaultName;
         }
 
-        AtomicInteger atomicInteger = concurrentService.printValue();
+        int atomicInteger = concurrentService.getCount();
 
         return Response
                 .ok(atomicInteger)

@@ -14,9 +14,8 @@ public class DownloadService {
 
     private String joke;
 
-
     @Schedule(second = "*/2", hour = "*", minute = "*")
-    public void joke() throws IOException {
+    public void downloadJoke() throws IOException {
         HttpURLConnection request = createRequest();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(request.getInputStream()));
@@ -31,7 +30,6 @@ public class DownloadService {
     }
 
     public String getJoke() {
-
         return joke;
     }
 

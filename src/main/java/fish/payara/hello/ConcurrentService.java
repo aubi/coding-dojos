@@ -19,4 +19,8 @@ public class ConcurrentService {
             System.out.println("##################### Running currently. Count --> " + count.incrementAndGet());
         }, 1, TimeUnit.SECONDS);
     }
+
+    public AtomicInteger printValue() {
+        return count;
+    }
 }

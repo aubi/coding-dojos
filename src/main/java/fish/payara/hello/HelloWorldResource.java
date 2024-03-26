@@ -16,6 +16,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 
+import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Path("hello")
@@ -27,6 +28,9 @@ public class HelloWorldResource {
 
     @Inject
     private ConcurrentService concurrentService;
+
+    @Inject
+    private DownloadService downloadService;
 
     @GET
     @Operation(summary = "Get a personalized greeting")
@@ -56,6 +60,12 @@ public class HelloWorldResource {
         return Response
                 .ok("Fallback data")
                 .build();
+
     }
 
+    @GET
+    @Path("joke")
+    public String printJoke() throws IOException {
+        return downloadService.joke();
+    }
 }

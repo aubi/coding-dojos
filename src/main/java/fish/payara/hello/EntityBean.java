@@ -29,4 +29,8 @@ public class EntityBean {
     public Optional<User> getByName(String name) {
         return users.stream().filter(user -> user.getUsername().equals(name)).findFirst();
     }
+
+    public void createNewUser(User user) {
+        users.add(user);
+    }
 }

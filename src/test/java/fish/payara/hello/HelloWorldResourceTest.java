@@ -16,7 +16,13 @@ import jakarta.ws.rs.core.Response;
 import java.io.File;
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.CompletionStage;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 @RunWith(Arquillian.class)
 @RunAsClient
@@ -59,5 +65,16 @@ public class HelloWorldResourceTest {
         assertEquals("Gaurav", user.getUsername());
 
         client.close();
+    }
+
+    @Test
+    public void testUserNotFound() throws ExecutionException, InterruptedException, TimeoutException {
+        Client client = ClientBuilder.newClient();
+        CompletionStage<User> csp = client.target("rest/v1/entities/Gaurav")
+                .request()
+                .rx()
+                .get(User.class);
+
+        assertEquals("Gaurav", csp.thenApply(u -> u.getUsername()).toCompletableFuture().get(2000, TimeUnit.MILLISECONDS));
     }
 }

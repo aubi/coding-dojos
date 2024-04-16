@@ -5,6 +5,7 @@ import jakarta.ejb.Singleton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Singleton
 public class EntityBean {
@@ -23,5 +24,9 @@ public class EntityBean {
 
     public List<User> getUsers() {
         return users;
+    }
+
+    public Optional<User> getByName(String name) {
+        return users.stream().filter(user -> user.getUsername().equals(name)).findFirst();
     }
 }

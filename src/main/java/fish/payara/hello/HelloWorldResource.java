@@ -1,24 +1,19 @@
 package fish.payara.hello;
 
+import jakarta.ejb.EJB;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.QueryParam;
-import jakarta.ws.rs.core.Response;
+import java.util.List;
 
 @Path("entities")
 public class HelloWorldResource {
 
-
-    @GET
-    public Response hello(@QueryParam("name") String name) {
-        if ((name == null) || name.trim().isEmpty()) {
-            name = "world";
-        }
-        return Response
-                .ok(name)
-                .build();
-    }
-
+    @EJB
+    private EntityBean entityBean;
     
+    @GET
+    public List<User> getAllUsers() {
+       return entityBean.getUsers();
+    }
 
 }

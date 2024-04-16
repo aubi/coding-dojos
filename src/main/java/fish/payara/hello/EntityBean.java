@@ -14,6 +14,11 @@ public class EntityBean {
     @PostConstruct
     public void init() {
         users = new ArrayList<>();
+        users.add(new User("Gaurav", "Secret"));
+        users.add(new User("Petr", "Secret"));
+        users.add(new User("Kalin", "Secret"));
+        users.add(new User("Luis", "Secret"));
+        users.add(new User("Abdul", "Secret"));
     }
 
     public List<User> getUsers() {

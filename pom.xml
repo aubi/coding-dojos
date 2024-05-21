@@ -192,6 +192,12 @@
                     <scope>test</scope>
                     <optional>true</optional>
                 </dependency>
+                
+                <dependency>        
+                    <groupId>org.glassfish.jersey.media</groupId>        
+                    <artifactId>jersey-media-json-jackson</artifactId>        
+                    <scope>test</scope>    
+                </dependency>
             </dependencies>
 
             <build>

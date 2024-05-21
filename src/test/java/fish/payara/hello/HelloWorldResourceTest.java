@@ -1,8 +1,8 @@
 package fish.payara.hello;
 
+import fish.payara.hello.model.SampleData;
 import fish.payara.secured.AdminResource;
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -18,7 +18,7 @@ import java.net.URL;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Arquillian.class)
-@RunAsClient
+//@RunAsClient
 public class HelloWorldResourceTest {
 
 
@@ -27,6 +27,7 @@ public class HelloWorldResourceTest {
         return ShrinkWrap.create(WebArchive.class)
                 .addClass(HelloWorldResource.class)
                 .addPackage(AdminResource.class.getPackage())
+                .addPackage(SampleData.class.getPackage())
                 .addClass(RestConfiguration.class)
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"));
     }
@@ -52,6 +53,22 @@ public class HelloWorldResourceTest {
         client.close();
     }
     
+    @Test
+    public void testDataEndpoint() {
+        String baseUrl = deploymentUrl.toString();
+
+        Client client = ClientBuilder.newClient();
+        Response response = client.target(baseUrl + "resources/hello/data")
+                .request(MediaType.APPLICATION_JSON)
+                .get();
+
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+        SampleData responseBody = response.readEntity(SampleData.class);
+        assertEquals(1, responseBody.getiVal());
+
+        client.close();
+    }
+
     @Test
     public void testAdminEndpoint() {
         String baseUrl = deploymentUrl.toString();

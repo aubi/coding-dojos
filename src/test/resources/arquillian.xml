@@ -6,6 +6,9 @@
     <configuration>
       <property name="payaraHome">target/${payara.home}</property>
       <property name="adminHost">localhost</property>
+      <!-- https://github.com/payara/ecosystem-arquillian-connectors/pull/230 -->
+      <property name="httpsPort">8181</property>
+      <property name="httpSecure">true</property>
       <property name="adminPort">4848</property>
       <property name="outputToConsole">true</property>
     </configuration>

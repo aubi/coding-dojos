@@ -1,5 +1,6 @@
 package fish.payara.hello;
 
+import fish.payara.secured.AdminResource;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
@@ -25,6 +26,7 @@ public class HelloWorldResourceTest {
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
                 .addClass(HelloWorldResource.class)
+                .addPackage(AdminResource.class.getPackage())
                 .addClass(RestConfiguration.class)
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"));
     }
@@ -52,6 +54,21 @@ public class HelloWorldResourceTest {
     
     @Test
     public void testAdminEndpoint() {
+        String baseUrl = deploymentUrl.toString();
+
+        Client client = ClientBuilder.newClient();
+        Response response = client.target(baseUrl).path("resources/admin")
+                .request(MediaType.TEXT_PLAIN)
+                .header("Authorization", "Basic "+ java.util.Base64.getEncoder().encodeToString("myadmin:secret".getBytes()))
+                .get();
+
+
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+        String responseBody = response.readEntity(String.class);
+        assertEquals("""
+            Protected information for user:myadmin | web user has role "user": true | web user has role "admin": true""", responseBody);
+
+        client.close();
     }
     
     @Test

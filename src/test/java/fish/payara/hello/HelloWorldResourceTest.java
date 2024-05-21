@@ -49,4 +49,12 @@ public class HelloWorldResourceTest {
 
         client.close();
     }
+    
+    @Test
+    public void testAdminEndpoint() {
+    }
+    
+    @Test
+    public void testProtectedEndpoint() {
+    }
 }

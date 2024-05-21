@@ -14,18 +14,19 @@ import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.io.File;
+import java.net.URISyntaxException;
 import java.net.URL;
+import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Arquillian.class)
-//@RunAsClient
 public class HelloWorldResourceTest {
 
 
-    @Deployment(testable = false)
+    @Deployment()
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
-                .addClass(HelloWorldResource.class)
+                .addPackage(HelloWorldResource.class.getPackage())
                 .addPackage(AdminResource.class.getPackage())
                 .addPackage(SampleData.class.getPackage())
                 .addClass(RestConfiguration.class)
@@ -67,6 +68,17 @@ public class HelloWorldResourceTest {
         assertEquals(1, responseBody.getiVal());
 
         client.close();
+    }
+
+    @Test
+    public void testMPRestDataEndpoint() throws URISyntaxException {
+        Response response = RestClientBuilder.newBuilder()
+                .baseUri(deploymentUrl.toURI().resolve("resources"))
+                .build(SampleDataClient.class)
+                .data();
+
+        SampleData responseBody = response.readEntity(SampleData.class);
+        assertEquals(1, responseBody.getiVal());
     }
 
     @Test

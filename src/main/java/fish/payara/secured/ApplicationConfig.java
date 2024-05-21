@@ -3,6 +3,7 @@ package fish.payara.secured;
 import jakarta.annotation.security.DeclareRoles;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
+import jakarta.security.enterprise.authentication.mechanism.http.BasicAuthenticationMechanismDefinition;
 import jakarta.security.enterprise.authentication.mechanism.http.FormAuthenticationMechanismDefinition;
 import jakarta.security.enterprise.authentication.mechanism.http.LoginToContinue;
 import jakarta.security.enterprise.identitystore.DatabaseIdentityStoreDefinition;
@@ -20,11 +21,7 @@ import java.util.Map;
         "${applicationConfig.hashAlgorithmParameters}"
     }
 )
-@FormAuthenticationMechanismDefinition(
-    loginToContinue = @LoginToContinue(
-        loginPage="/login.xhtml",
-        errorPage="/login_error.xhtml"
-    )
+@BasicAuthenticationMechanismDefinition(
 )
 @DeclareRoles({ "user", "admin" })
 @ApplicationScoped

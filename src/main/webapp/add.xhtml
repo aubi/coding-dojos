@@ -6,7 +6,9 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <p>Hello from Facelets</p>
-        <p><a href="add.xhtml">add</a></p>
+        <h:form id="add-form">
+            <p>Let's <h:inputText value="#{addingBean.a}"/> + <h:inputText value="#{addingBean.b}"/> = <h:outputText value="#{addingBean.result}"/></p>
+            <p><h:commandButton action="#{addingBean.calc}" value="Add" /></p>
+        </h:form>
     </h:body>
 </html>

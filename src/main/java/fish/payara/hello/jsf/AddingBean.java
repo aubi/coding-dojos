@@ -8,6 +8,7 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
  */
 @Named
 @SessionScoped
-public class AddingBean {
+public class AddingBean implements Serializable {
 
     private double result;
     private List<Double> history = new ArrayList<>();
@@ -27,7 +28,7 @@ public class AddingBean {
 
     public void calc() {
         history.add(valueA);
-        result = history.stream().reduce((aDouble, aDouble2) -> aDouble + aDouble2).get();
+        result = history.stream().reduce(Double::sum).get();
     }
 
     public double getResult() {

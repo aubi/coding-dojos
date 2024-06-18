@@ -7,10 +7,19 @@
     </h:head>
     <h:body>
         <h:form id="add-form">
-            <h:dataTable value="#{addingBean.history}">
+            <h:dataTable var = "number" value="#{addingBean.history}">
+                <h:column>
+                    #{number}
+                </h:column>
+
+
+
+
+
             </h:dataTable>
+
             <p><h:inputText value="#{addingBean.valueA}"/></p>
-            
+
             <p><h:commandButton action="#{addingBean.calc}" value="Add" /></p>
         </h:form>
     </h:body>

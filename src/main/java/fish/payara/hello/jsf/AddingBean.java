@@ -5,8 +5,10 @@
 package fish.payara.hello.jsf;
 
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,11 +16,11 @@ import java.util.List;
  * @author aubi
  */
 @Named
-@RequestScoped
+@SessionScoped
 public class AddingBean {
 
     private double result;
-    private List<Double> history;
+    private List<Double> history = new ArrayList<>();
     
     private Double valueA;
     

@@ -19,8 +19,12 @@ public class AddingBean {
 
     private double result;
     private List<Double> history;
+    
+    private Double valueA;
+    
 
     public void calc() {
+        history.add(valueA);
         result = history.stream().reduce((aDouble, aDouble2) -> aDouble + aDouble2).get();
     }
 
@@ -36,4 +40,11 @@ public class AddingBean {
         return history;
     }
 
+    public Double getValueA() {
+        return valueA;
+    }
+
+    public void setValueA(Double valueA) {
+        this.valueA = valueA;
+    }
 }

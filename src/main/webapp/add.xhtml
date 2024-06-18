@@ -9,6 +9,8 @@
         <h:form id="add-form">
             <h:dataTable value="#{addingBean.history}">
             </h:dataTable>
+            <p><h:inputText value="#{addingBean.valueA}"/></p>
+            
             <p><h:commandButton action="#{addingBean.calc}" value="Add" /></p>
         </h:form>
     </h:body>

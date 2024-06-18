@@ -7,6 +7,8 @@ package fish.payara.hello.jsf;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 
+import java.util.List;
+
 /**
  *
  * @author aubi
@@ -15,28 +17,11 @@ import jakarta.inject.Named;
 @RequestScoped
 public class AddingBean {
 
-    private double a;
-    private double b;
     private double result;
+    private List<Double> history;
 
     public void calc() {
-        result = a + b;
-    }
-
-    public double getA() {
-        return a;
-    }
-
-    public void setA(double a) {
-        this.a = a;
-    }
-
-    public double getB() {
-        return b;
-    }
-
-    public void setB(double b) {
-        this.b = b;
+        result = history.stream().reduce((aDouble, aDouble2) -> aDouble + aDouble2).get();
     }
 
     public double getResult() {
@@ -45,6 +30,10 @@ public class AddingBean {
 
     public void setResult(double result) {
         this.result = result;
+    }
+
+    public List<Double> getHistory() {
+        return history;
     }
 
 }

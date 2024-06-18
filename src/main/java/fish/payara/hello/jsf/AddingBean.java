@@ -5,15 +5,14 @@
 package fish.payara.hello.jsf;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.model.DataModel;
 import jakarta.faces.model.ListDataModel;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  *
@@ -25,22 +24,28 @@ public class AddingBean implements Serializable {
 
     private double result;
     private List<Double> history = new ArrayList<>();
-    private ListDataModel<Double> historyDataModel;
+    private DataModel<Double> historyDataModel;
     
     private Double valueA;
 
     @PostConstruct
     public void init(){
-        historyDataModel = new ListDataModel<>(history);
     }
 
     public void removeNum(){
-        history.remove(historyDataModel.getRowData());
+        Double rowData = historyDataModel.getRowData();
+        history.remove(rowData);
+        refresh();
     }
 
     public void calc() {
         history.add(valueA);
-        result = history.stream().reduce(Double::sum).get();
+        refresh();
+    }
+
+    private void refresh() {
+        result = history.stream().reduce(0d, Double::sum);
+        historyDataModel = new ListDataModel<>(history);
     }
 
     public double getResult() {
@@ -51,8 +56,8 @@ public class AddingBean implements Serializable {
         this.result = result;
     }
 
-    public List<Double> getHistory() {
-        return history;
+    public DataModel<Double> getHistory() {
+        return historyDataModel;
     }
 
     public Double getValueA() {

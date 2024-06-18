@@ -13,10 +13,10 @@
                 </h:column>
             </h:dataTable>
 
-            <p><h:inputText value="#{addingBean.valueA}"/></p>
+            <p><h:inputText value="#{addingBean.valueA}" id="num"/></p>
             <p><h:outputText value="Total = #{addingBean.result}" id="result"/> </p>
             <p><h:commandButton action="#{addingBean.calc}" value="Add">
-                <f:ajax render="numbertable result"/>
+                    <f:ajax execute="num" render="numbertable result"/>
             </h:commandButton></p>
         </h:form>
     </h:body>

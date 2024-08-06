@@ -1,7 +1,12 @@
 package fish.payara.watchdog.jsf;
 
-import jakarta.inject.Named;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
+
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +32,29 @@ public class Servers {
 
     public void setList(List<String> servers) {
         this.servers = servers;
+    }
+
+    public List<String> getTimes() {
+        List<String> times = new ArrayList<>();
+        for (String s : servers) {
+            try {
+                long start = System.currentTimeMillis();
+
+                HttpClient client = HttpClient.newHttpClient();
+                HttpRequest request = HttpRequest.newBuilder()
+                                                 .uri(URI.create(s))
+                                                 .build();
+                client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                      .thenApply(HttpResponse::body)
+                      .thenAccept(System.out::println)
+                      .join();
+                long end = System.currentTimeMillis();
+                times.add((end - start) + "ms");
+            } catch (Exception e) {
+                times.add("0ms");
+            }
+        }
+        return times;
     }
 
 }

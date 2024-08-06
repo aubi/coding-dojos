@@ -12,5 +12,11 @@
                 <h:outputText value="#{row}"/>
             </h:column>
         </h:dataTable>
+
+        <h:dataTable value="#{servers.times}" var="time">
+            <h:column>
+                <h:outputText value="#{time}"/>
+            </h:column>
+        </h:dataTable>
     </h:body>
 </html>

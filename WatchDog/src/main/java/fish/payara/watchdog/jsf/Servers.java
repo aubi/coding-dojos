@@ -22,8 +22,8 @@ public class Servers {
      * Creates a new instance of Servers
      */
     public Servers() {
-        servers.add("google.com");
-        servers.add("seznam.cz");
+        servers.add("http://google.com");
+        servers.add("http://seznam.cz");
     }
 
     public List<String> getList() {
@@ -51,7 +51,7 @@ public class Servers {
                 long end = System.currentTimeMillis();
                 times.add((end - start) + "ms");
             } catch (Exception e) {
-                times.add("0ms");
+                times.add(e.getMessage());
             }
         }
         return times;

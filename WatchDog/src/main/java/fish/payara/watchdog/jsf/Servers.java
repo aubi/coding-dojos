@@ -61,6 +61,12 @@ public class Servers {
         return times;
     }
 
-    record TimeMeasurement(URI target, Duration duration, String error) {}
+    public record TimeMeasurement(URI target, Duration duration, String error) {
+    
+        public long getMS() {
+            return duration == null ? -1 : duration.toMillis();
+        }
+        
+    }
 
 }

@@ -7,12 +7,12 @@
     </h:head>
     <h:body>
         <h1>List of Servers</h1>
-        <h:dataTable value="#{servers.times}" var="time">
+        <h:dataTable value="#{servers.times}" var="time" border="1">
             <h:column>
                 <h:outputText value="#{time.target()}"/>
             </h:column>
             <h:column>
-                <h:outputText value="#{time.duration()}"/>
+                <h:outputText value="#{time.getMS()}"/>
             </h:column>
             <h:column>
                 <h:outputText value="#{time.error()}"/>

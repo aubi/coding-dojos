@@ -7,15 +7,15 @@
     </h:head>
     <h:body>
         <h1>List of Servers</h1>
-        <h:dataTable value="#{servers.list}" var="row">
-            <h:column>
-                <h:outputText value="#{row}"/>
-            </h:column>
-        </h:dataTable>
-
         <h:dataTable value="#{servers.times}" var="time">
             <h:column>
-                <h:outputText value="#{time}"/>
+                <h:outputText value="#{time.target()}"/>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{time.duration()}"/>
+            </h:column>
+            <h:column>
+                <h:outputText value="#{time.error()}"/>
             </h:column>
         </h:dataTable>
     </h:body>

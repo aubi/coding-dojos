@@ -7,6 +7,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.sql.Time;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class Servers {
     public Servers() {
         servers.add("http://google.com");
         servers.add("http://seznam.cz");
+        servers.add("not-an-uri");
     }
 
     public List<String> getList() {
@@ -34,27 +37,30 @@ public class Servers {
         this.servers = servers;
     }
 
-    public List<String> getTimes() {
-        List<String> times = new ArrayList<>();
+    public List<TimeMeasurement> getTimes() {
+        List<TimeMeasurement> times = new ArrayList<>();
         for (String s : servers) {
+            URI uri = URI.create(s);
             try {
                 long start = System.currentTimeMillis();
 
                 HttpClient client = HttpClient.newHttpClient();
                 HttpRequest request = HttpRequest.newBuilder()
-                                                 .uri(URI.create(s))
+                                                 .uri(uri)
                                                  .build();
                 client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                       .thenApply(HttpResponse::body)
                       .thenAccept(System.out::println)
                       .join();
                 long end = System.currentTimeMillis();
-                times.add((end - start) + "ms");
+                times.add(new TimeMeasurement(uri, Duration.ofMillis(end - start), null));
             } catch (Exception e) {
-                times.add(e.getMessage());
+                times.add(new TimeMeasurement(uri, null, e.getMessage()));
             }
         }
         return times;
     }
+
+    record TimeMeasurement(URI target, Duration duration, String error) {}
 
 }

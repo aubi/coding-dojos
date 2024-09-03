@@ -23,4 +23,21 @@ public class RomanNumeralsTest {
         assertEquals("III", RomanNumerals.convert(3));
     }
 
+    @Test
+    public void testConvert4() {
+        assertEquals("IV", RomanNumerals.convert(4));
+    }
+
+    @Test
+    public void testConvert5() {
+        assertEquals("V", RomanNumerals.convert(5));
+    }
+
+    @Test
+    public void testConvert6to8() {
+        assertEquals("VI", RomanNumerals.convert(6));
+        assertEquals("VII", RomanNumerals.convert(7));
+        assertEquals("VIII", RomanNumerals.convert(8));
+    }
+
 }

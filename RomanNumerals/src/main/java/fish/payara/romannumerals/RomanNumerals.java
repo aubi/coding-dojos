@@ -12,6 +12,18 @@ public class RomanNumerals {
     }
 
     public static String convert(int num) {
+        if (num == 4) {
+            return "IV";
+        }
+
+        if (num == 5) {
+            return "V";
+        }
+
+        if (num > 5) {
+
+        }
+
         return "I".repeat(num);
     }
 }

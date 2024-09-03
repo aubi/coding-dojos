@@ -18,6 +18,10 @@ public class RomanNumerals {
             return "V" + "I".repeat(num-5);
         } else if (num == 9) {
             return "IX";
+        } else if (num >= 10 && num < 14) {
+            return "X" + "I".repeat(num-10);
+        } else if (num == 14) {
+            return "XIV";
         }
         return "I".repeat(num);
     }

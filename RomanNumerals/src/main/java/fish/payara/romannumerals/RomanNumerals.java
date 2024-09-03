@@ -12,17 +12,20 @@ public class RomanNumerals {
     }
 
     public static String convert(int num) {
-        StringBuilder answer = new StringBuilder();
+        String XL = "XL";
+
         if (num == 50) {
             return "L";
         }
         else if (num == 40) {
-            return "XL";
+            return XL;
+        } else if (num > 40 && num < 44) {
+            return XL + repeatI(num, 40);
+        } else if(num == 45) {
+            return XL + "V";
         }
-        else if (num > 40 && num < 44) {
-            return "XL" + repeatI(num, 40);
-        }
-        
+        StringBuilder answer = new StringBuilder();
+
         if (num >= 10) {
             int tens = num / 10;
             answer.append("X".repeat(tens));
@@ -47,4 +50,5 @@ public class RomanNumerals {
     private static String repeatI(int num, int count) {
         return "I".repeat(num - count);
     }
+
 }

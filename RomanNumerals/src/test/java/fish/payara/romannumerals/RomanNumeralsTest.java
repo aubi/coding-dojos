@@ -93,4 +93,14 @@ public class RomanNumeralsTest {
     public void testConvert41() {
         assertEquals("XLI", RomanNumerals.convert(41));
     }
+
+    @Test
+    public void testConvert45() {
+        assertEquals("XLV", RomanNumerals.convert(45));
+    }
+
+    @Test
+    public void testConvert50() {
+        assertEquals("L", RomanNumerals.convert(50));
+    }
 }

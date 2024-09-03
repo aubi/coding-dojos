@@ -17,25 +17,21 @@ public class RomanNumerals {
         if (num >= 10) {
             int tens = num / 10;
             answer.append("X".repeat(tens));
-            num -= tens;
+            num -= tens * 10;
         }
-
-        if (num == 19) {
-            return "XIX";
-        } else if (num >= 15) {
-            return "XV" + repeatI(num, 15);
-        } else if (num == 14) {
-            return "XIV";
-        } else if (num >= 10) {
-            return "X" + repeatI(num, 10);
-        } else if (num == 9) {
-            return "IX";
+        return convertLessThan10(answer , num);
+    }
+    
+    private static String convertLessThan10(StringBuilder answer , int num) {
+       if (num == 9) {
+            answer.append("IX");
         } else if (num >= 5) {
-            return "V" + repeatI(num, 5);
+            answer.append("V").append(repeatI(num, 5));
         } else if (num == 4) {
-            return "IV";
+            answer.append("IV");
+        } else {
+            answer.append("I".repeat(num));
         }
-        answer.append("I".repeat(num));
         return answer.toString();
     }
 

@@ -12,14 +12,12 @@ public class RomanNumerals {
     }
 
     public static String convert(int num) {
-        if (num > 23) {
-            return "No clue";
-        }
-
         StringBuilder answer = new StringBuilder();
-        while (num >= 20) {
-            answer.append("X");
-            num -= 10;
+
+        if (num >= 10) {
+            int tens = num / 10;
+            answer.append("X".repeat(tens));
+            num -= tens;
         }
 
         if (num == 19) {

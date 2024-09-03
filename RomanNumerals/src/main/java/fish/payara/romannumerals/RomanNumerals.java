@@ -14,16 +14,11 @@ public class RomanNumerals {
     public static String convert(int num) {
         if (num == 4) {
             return "IV";
+        } else if (num >= 5 && num < 9) {
+            return "V" + "I".repeat(num-5);
+        } else if (num == 9) {
+            return "IX";
         }
-
-        if (num == 5) {
-            return "V";
-        }
-
-        if (num > 5) {
-
-        }
-
         return "I".repeat(num);
     }
 }

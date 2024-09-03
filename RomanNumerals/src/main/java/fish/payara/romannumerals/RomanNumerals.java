@@ -13,7 +13,16 @@ public class RomanNumerals {
 
     public static String convert(int num) {
         StringBuilder answer = new StringBuilder();
-
+        if (num == 50) {
+            return "L";
+        }
+        else if (num == 40) {
+            return "XL";
+        }
+        else if (num > 40 && num < 44) {
+            return "XL" + repeatI(num, 40);
+        }
+        
         if (num >= 10) {
             int tens = num / 10;
             answer.append("X".repeat(tens));

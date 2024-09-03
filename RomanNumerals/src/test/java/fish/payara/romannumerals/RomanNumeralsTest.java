@@ -83,4 +83,14 @@ public class RomanNumeralsTest {
     public void testConvert30() {
         assertEquals("XXX", RomanNumerals.convert(30));
     }
+    
+    @Test
+    public void testConvert40() {
+        assertEquals("XL", RomanNumerals.convert(40));
+    }
+    
+    @Test
+    public void testConvert41() {
+        assertEquals("XLI", RomanNumerals.convert(41));
+    }
 }

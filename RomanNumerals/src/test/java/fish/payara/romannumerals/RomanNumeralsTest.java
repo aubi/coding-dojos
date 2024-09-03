@@ -65,4 +65,22 @@ public class RomanNumeralsTest {
         assertEquals("XVII", RomanNumerals.convert(17));
         assertEquals("XVIII", RomanNumerals.convert(18));
     }
+
+    @Test
+    public void testConvert20to23() {
+        assertEquals("XX", RomanNumerals.convert(20));
+        assertEquals("XXI", RomanNumerals.convert(21));
+        assertEquals("XXII", RomanNumerals.convert(22));
+        assertEquals("XXIII", RomanNumerals.convert(23));
+    }
+
+    @Test
+    public void testConvert19() {
+        assertEquals("XIX", RomanNumerals.convert(19));
+    }
+
+    @Test
+    public void testConvert30() {
+        assertEquals("XXX", RomanNumerals.convert(30));
+    }
 }

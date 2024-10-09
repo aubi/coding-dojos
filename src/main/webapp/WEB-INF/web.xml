@@ -29,6 +29,16 @@
         </auth-constraint>
     </security-constraint>
 
+    <security-constraint>
+            <display-name>Secured Protected pages</display-name>
+            <web-resource-collection>
+                <web-resource-name>protected</web-resource-name>
+                <url-pattern>/protected/*</url-pattern>
+            </web-resource-collection>
+            <auth-constraint>
+                <role-name>user</role-name>
+            </auth-constraint>
+    </security-constraint>
 
     <login-config>
         <auth-method>FORM</auth-method>

@@ -67,20 +67,6 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
-            <!-- Execute 'mvn clean package cargo:run' to run the application. -->
-            <plugin>
-                <groupId>org.codehaus.cargo</groupId>
-                <artifactId>cargo-maven3-plugin</artifactId>
-                <version>${cargo.version}</version>
-                <configuration>
-                    <container>
-                        <containerId>payara</containerId>
-                        <zipUrlInstaller>
-                            <url>${payara.url}</url>
-                        </zipUrlInstaller>
-                    </container>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 

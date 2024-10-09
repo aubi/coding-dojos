@@ -9,7 +9,6 @@ import jakarta.ws.rs.core.Response;
 
 /**
  * Simply protected rest resource for role 'admin'.
- *
  */
 @Path("admin")
 @RolesAllowed("admin")
@@ -28,6 +27,14 @@ public class AdminResource {
                 .ok("Protected information for user:" + webName
                         + " | web user has role \"user\": " + securityContext.isCallerInRole("user")
                         + " | web user has role \"admin\": " + securityContext.isCallerInRole("admin"))
+                .build();
+    }
+
+    @GET
+    @Path("user")
+    @RolesAllowed("user")
+    public Response user() {
+        return Response.ok("Nice message")
                 .build();
     }
 }

@@ -30,14 +30,17 @@
     </security-constraint>
 
     <security-constraint>
-            <display-name>Secured Protected pages</display-name>
-            <web-resource-collection>
-                <web-resource-name>protected</web-resource-name>
-                <url-pattern>/protected/*</url-pattern>
-            </web-resource-collection>
-            <auth-constraint>
-                <role-name>user</role-name>
-            </auth-constraint>
+        <display-name>Secured Protected pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>protected</web-resource-name>
+            <url-pattern>/protected/test.war</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>user</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
     </security-constraint>
 
     <login-config>

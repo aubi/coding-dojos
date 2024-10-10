@@ -30,19 +30,19 @@ Today's task is to practice security.
         </auth-constraint>
     </security-constraint>
 
-Role description
+Role description (add list of all roles in the app)
 
     <security-role>
         <description>DESCRIPTION</description>
         <role-name>ROLENAME</role-name>
     </security-role>
 
-Login page definition:
+Login config definition - method, realm name and login page file:
 
     <login-config>
         <auth-method>FORM</auth-method>
         <!-- Default works with file realm -->
-        <realm-name>REALNAME</realm-name>
+        <realm-name>REALMNAME</realm-name>
         <form-login-config>
             <form-login-page>/login.xhtml</form-login-page>
             <form-error-page>/login.xhtml</form-error-page>
@@ -63,3 +63,9 @@ Logout from Faces
     ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).logout();
     FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 
+HTTPS
+
+    <security-constraint>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>

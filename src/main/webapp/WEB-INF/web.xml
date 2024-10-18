@@ -15,4 +15,8 @@
             <role-name>user</role-name>
         </auth-constraint>
     </security-constraint>
+
+    <login-config>
+        <realm-name>file</realm-name>
+    </login-config>
 </web-app>

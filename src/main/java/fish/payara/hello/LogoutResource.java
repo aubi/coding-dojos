@@ -18,8 +18,9 @@ public class LogoutResource {
         var session = request.getSession(false);
         if (session != null) {
             session.invalidate();
+            return "You have been logged out";
         }
-        return "You have been logged out";
+        return "No session";
     }
 
 }

@@ -47,6 +47,7 @@ public class GenerationAppTest {
     void shouldGenerateSimpleApp() throws InterruptedException {
         assertThat(page).hasTitle("Generate Payara Application");
         StarterPage starterPage = new StarterPage(page);
+        starterPage.declineCookies();
         starterPage.chooseBuild("Gradle");  
         page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("target/screenshot-select-gradle.png")));
         PlaywrightAssertions.assertThat(starterPage.getGradleCheckbox()).isChecked();
@@ -66,5 +67,8 @@ public class GenerationAppTest {
 
         PlaywrightAssertions.assertThat(starterPage.getJakartaEEVersion()).isVisible();
         Thread.sleep(6000);
+
+        starterPage.selectJakartaEEVersion("Jakarta EE 8");
+        starterPage.selectCoreProfile();
     }
 }

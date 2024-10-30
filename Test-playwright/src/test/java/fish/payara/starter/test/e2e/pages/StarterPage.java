@@ -16,6 +16,7 @@ public class StarterPage {
     private static final String VERSION_INPUT_BOX = "#version";
     private static final String NEXT_BUTTON_TO_JAKARTAEE = "a[href='#stb0-st1']";
     private static final String JAKARTAEE_VERSION_LABEL = "label[for='jakartaEEVersion']";
+    private static final String CORE_PROFILE = "label[for='core']";
 
     private final Page page;
 
@@ -56,6 +57,14 @@ public class StarterPage {
         getVersion().fill(value);
     }
 
+    public void selectJakartaEEVersion (String version) {
+        getJakartaEEVersion().selectOption(version);
+    }
+
+    public void selectCoreProfile () {
+        getCoreRadio().click();
+    }
+
     public Locator getGradleCheckbox() {
         return page.locator(GRADLE_RADIO);
     }
@@ -82,5 +91,9 @@ public class StarterPage {
 
     public Locator getJakartaEEVersion() {
         return page.locator(JAKARTAEE_VERSION_LABEL);
+    }
+
+    public Locator getCoreRadio () {
+        return page.locator(CORE_PROFILE);
     }
 }

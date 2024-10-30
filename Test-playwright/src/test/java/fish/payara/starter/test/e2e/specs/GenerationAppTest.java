@@ -2,8 +2,10 @@ package fish.payara.starter.test.e2e.specs;
 
 import fish.payara.starter.test.e2e.pages.*;
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.assertions.PlaywrightAssertions;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import com.microsoft.playwright.junit.UsePlaywright;
+import java.nio.file.Paths;
 import org.junit.jupiter.api.*;
 
 @UsePlaywright
@@ -42,6 +44,9 @@ public class GenerationAppTest {
         assertThat(page).hasTitle("Generate Payara Application");
         StarterPage starterPage = new StarterPage(page);
         starterPage.chooseBuild("Gradle");  
+        page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("screenshot-select-gradle.png")));
+        PlaywrightAssertions.assertThat(starterPage.getGradleCheckbox()).isChecked();
+        PlaywrightAssertions.assertThat(starterPage.getMavenCheckbox()).not().isChecked();
         //assertThat(page).hasTitle("Generate Payara Application");
         
     }

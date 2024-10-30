@@ -34,10 +34,12 @@ public class StarterPage {
     
     
     public void fillGroupId(String value) throws InterruptedException {
+        getGroupId().clear();
         getGroupId().fill(value);
     }
 
-    public void selectArtifactId(String value) throws InterruptedException {
+    public void fillArtifactId (String value) throws InterruptedException {
+        getArtifactId().clear();
         getArtifactId().fill(value);
     }
 

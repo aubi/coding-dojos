@@ -48,6 +48,11 @@ public class GenerationAppTest {
         PlaywrightAssertions.assertThat(starterPage.getGradleCheckbox()).isChecked();
         PlaywrightAssertions.assertThat(starterPage.getMavenCheckbox()).not().isChecked();
         //assertThat(page).hasTitle("Generate Payara Application");
-        
+
+        starterPage.fillGroupId("fish.payara.playwrighttest");
+        starterPage.fillArtifactId("PlaywrightTest");
+
+        PlaywrightAssertions.assertThat(starterPage.getGroupId()).hasValue("fish.payara.playwrighttest");
+        PlaywrightAssertions.assertThat(starterPage.getArtifactId()).hasValue("PlaywrightTest");
     }
 }

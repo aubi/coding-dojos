@@ -28,7 +28,7 @@ public class GenerationAppTest {
     void createPage(){
         context = browser.newContext();
         page = context.newPage();
-        page.navigate("https://start.payara.fish/");
+        page.navigate("https://aidemo.start.payara.fish/");
         page.waitForSelector("div.hero", new Page.WaitForSelectorOptions().setTimeout(120000));
     }
     
@@ -41,6 +41,8 @@ public class GenerationAppTest {
     void shouldGenerateSimpleApp() {
         assertThat(page).hasTitle("Generate Payara Application");
         StarterPage starterPage = new StarterPage(page);
-                
+        starterPage.chooseBuild("Gradle");  
+        //assertThat(page).hasTitle("Generate Payara Application");
+        
     }
 }

@@ -8,8 +8,9 @@ import com.microsoft.playwright.junit.UsePlaywright;
 public class StarterPage {
     private static final String MAVEN_RADIO = "label[for='maven']";
     private static final String GRADLE_RADIO = "label[for='gradle']";
-    private static final String GROUP_ID_INPUT_BOX = "label[for='groupId']";
-    private static final String ARTIFACT_ID_INPUT_BOX = "label[for='artifactId']";
+    private static final String GROUP_ID_INPUT_BOX = "#groupId";
+    private static final String ARTIFACT_ID_INPUT_BOX = "#artifactId";
+    private static final String VERSION_INPUT_BOX = "#version";
 
     private final Page page;
 
@@ -43,6 +44,11 @@ public class StarterPage {
         getArtifactId().fill(value);
     }
 
+    public void fillVersion (String value) throws InterruptedException {
+        getVersion().clear();
+        getVersion().fill(value);
+    }
+
     public Locator getGradleCheckbox() {
         return page.locator(GRADLE_RADIO);
     }
@@ -58,4 +64,9 @@ public class StarterPage {
     public Locator getArtifactId() {
         return page.locator(ARTIFACT_ID_INPUT_BOX);
     }
+
+    public Locator getVersion() {
+        return page.locator(VERSION_INPUT_BOX);
+    }
 }
+

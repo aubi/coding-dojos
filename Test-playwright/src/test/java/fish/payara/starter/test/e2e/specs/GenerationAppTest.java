@@ -14,6 +14,10 @@ public class GenerationAppTest {
     static Browser browser;
     BrowserContext context;
     Page page;
+    
+    private static final String groupId = "fish.payara.playwrighttest";
+    private static final String artifactId = "PlaywrightTest";
+    private static final String version = "1.0";
 
     @BeforeAll
     static void launchBrowser() {
@@ -47,12 +51,13 @@ public class GenerationAppTest {
         page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("screenshot-select-gradle.png")));
         PlaywrightAssertions.assertThat(starterPage.getGradleCheckbox()).isChecked();
         PlaywrightAssertions.assertThat(starterPage.getMavenCheckbox()).not().isChecked();
-        //assertThat(page).hasTitle("Generate Payara Application");
 
-        starterPage.fillGroupId("fish.payara.playwrighttest");
-        starterPage.fillArtifactId("PlaywrightTest");
+        starterPage.fillGroupId(groupId);
+        starterPage.fillArtifactId(artifactId);
+        starterPage.fillVersion(version);
 
-        PlaywrightAssertions.assertThat(starterPage.getGroupId()).hasValue("fish.payara.playwrighttest");
-        PlaywrightAssertions.assertThat(starterPage.getArtifactId()).hasValue("PlaywrightTest");
+        PlaywrightAssertions.assertThat(starterPage.getGroupId()).hasValue(groupId);
+        PlaywrightAssertions.assertThat(starterPage.getArtifactId()).hasValue(artifactId);
+        PlaywrightAssertions.assertThat(starterPage.getVersion()).hasValue(version);
     }
 }

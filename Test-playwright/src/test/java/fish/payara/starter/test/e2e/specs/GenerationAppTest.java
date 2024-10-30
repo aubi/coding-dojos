@@ -48,7 +48,7 @@ public class GenerationAppTest {
         assertThat(page).hasTitle("Generate Payara Application");
         StarterPage starterPage = new StarterPage(page);
         starterPage.chooseBuild("Gradle");  
-        page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("screenshot-select-gradle.png")));
+        page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("target/screenshot-select-gradle.png")));
         PlaywrightAssertions.assertThat(starterPage.getGradleCheckbox()).isChecked();
         PlaywrightAssertions.assertThat(starterPage.getMavenCheckbox()).not().isChecked();
 
@@ -59,5 +59,12 @@ public class GenerationAppTest {
         PlaywrightAssertions.assertThat(starterPage.getGroupId()).hasValue(groupId);
         PlaywrightAssertions.assertThat(starterPage.getArtifactId()).hasValue(artifactId);
         PlaywrightAssertions.assertThat(starterPage.getVersion()).hasValue(version);
+
+        Thread.sleep(1000);
+
+        starterPage.getNextButtonToJakartaEE().click();
+
+        PlaywrightAssertions.assertThat(starterPage.getJakartaEEVersion()).isVisible();
+        Thread.sleep(6000);
     }
 }

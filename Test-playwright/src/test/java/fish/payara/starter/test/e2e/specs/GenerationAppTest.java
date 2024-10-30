@@ -38,7 +38,7 @@ public class GenerationAppTest {
     }
     
     @Test
-    void shouldGenerateSimpleApp() {
+    void shouldGenerateSimpleApp() throws InterruptedException {
         assertThat(page).hasTitle("Generate Payara Application");
         StarterPage starterPage = new StarterPage(page);
         starterPage.chooseBuild("Gradle");  

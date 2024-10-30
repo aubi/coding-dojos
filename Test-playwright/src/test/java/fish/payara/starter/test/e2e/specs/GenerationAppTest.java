@@ -14,7 +14,7 @@ public class GenerationAppTest {
     static Browser browser;
     BrowserContext context;
     Page page;
-    
+
     private static final String groupId = "fish.payara.playwrighttest";
     private static final String artifactId = "PlaywrightTest";
     private static final String version = "1.0";

@@ -8,6 +8,7 @@ import com.microsoft.playwright.junit.UsePlaywright;
 public class StarterPage {
 
     private static final String PROJECT_DESCRIPTION_BLOCK = "fieldset[id='stb0-st0']";
+    private static final String DECLINE_COOKIES = "#hs-eu-decline-button";
     private static final String MAVEN_RADIO = "label[for='maven']";
     private static final String GRADLE_RADIO = "label[for='gradle']";
     private static final String GROUP_ID_INPUT_BOX = "#groupId";
@@ -35,7 +36,10 @@ public class StarterPage {
                 throw new IllegalArgumentException("Invalid value: " + value);
         }
     }
-    
+
+    public void declineCookies () {
+        page.locator(DECLINE_COOKIES).click();
+    }
     
     public void fillGroupId(String value) throws InterruptedException {
         getGroupId().clear();

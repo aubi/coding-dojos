@@ -1,3 +1,4 @@
+
 package fish.payara.onebrcpayara;
 
 import java.io.BufferedReader;
@@ -9,12 +10,26 @@ import java.io.PrintStream;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+/*
+Results:
+111,772,193 lines
+Without parallel addToData
+real	1m1.241s
+user	1m34.518s
+sys	0m5.860s
+
+With parallel addToData
+real	1m22.249s
+user	4m48.438s
+sys	1m13.989s
+ */
 
 /**
  * 1 Billion Row Challenge. See https://1brc.dev/
@@ -28,10 +43,10 @@ public class OneBRCPayara {
     public static void main(String[] args) throws FileNotFoundException, IOException, InterruptedException {
         System.out.println("Available CPU Cores:" + Runtime.getRuntime().availableProcessors());
 
-//        Map<String, List<Double>> stats = new HashMap<>();
-        Map<String, List<Double>> stats = new ConcurrentHashMap<>();
+        Map<String, List<Double>> stats = new HashMap<>();
+//        Map<String, List<Double>> stats = new ConcurrentHashMap<>();
         System.out.println("Let's read the file");
-        try (Reader file = new BufferedReader(new FileReader("OneBRCPayara/data/weather_stations.csv"), 1024 * 1024); PrintStream out = new PrintStream(new FileOutputStream("stats.csv"))) {
+        try (Reader file = new BufferedReader(new FileReader("../weather_stations.csv"), 1024 * 1024); PrintStream out = new PrintStream(new FileOutputStream("stats.csv"))) {
             Scanner scanner = new Scanner(file);
             //Let's skip the first 2 "header" lines
             scanner.nextLine();

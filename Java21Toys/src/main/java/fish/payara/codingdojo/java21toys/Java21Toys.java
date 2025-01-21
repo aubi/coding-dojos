@@ -15,20 +15,12 @@ public class Java21Toys {
     }
 
     public double calcPreference(CarBrand brand) {
-        double pref = 0;
-        switch (brand) {
-            case AUDI:
-                pref = 0.3;
-                break;
-            case VW:
-                pref = 0.9;
-                break;
-            case TESLA:
-                pref = 1.0;
-                break;
-            default:
-                throw new IllegalStateException("Unexpected brand: " + brand);
-        }
-        return pref;
+        return switch (brand) {
+            case AUDI -> 0.3;
+            case VW -> 0.9;
+            case TESLA -> 1.0;
+            case FIAT -> 0.02;
+            case PORSCHE -> 0.8;
+        };
     }
 }

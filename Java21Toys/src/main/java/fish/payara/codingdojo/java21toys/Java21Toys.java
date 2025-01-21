@@ -3,10 +3,15 @@
  */
 package fish.payara.codingdojo.java21toys;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Petr Aubrecht <aubrecht@asoftware.cz>
@@ -26,8 +31,8 @@ public class Java21Toys {
         Map<String, Double> selectedHappinessByOrigin = calcHappinessByOriginSelected(Arrays.stream(CarBrand.values()).toList());
         System.out.println(selectedHappinessByOrigin);
 
-        System.out.println("Happiness by country chart");
-        System.out.println(happinessByCountryChart());
+        System.out.println("Create Happiness chart by country ");
+        happinessByCountryChart();
     }
 
     public static double calcPreference(CarBrand brand) {
@@ -89,14 +94,35 @@ public class Java21Toys {
                 ));
     }
 
-    public static String happinessByCountryChart () {
-        StringBuilder chart = new StringBuilder();
-        for (Map.Entry<String, Double> entry : calcHappinessByOrigin(List.of(CarBrand.values())).entrySet()) {
-            chart.append(entry.getKey() + ":\t" + "#".repeat((int)(entry.getValue() * 100)));
-            chart.append("\n");
+    public static void happinessByCountryChart () {
+        try {
+            String htmlContentStart = """
+                                                  <html>
+                                                     <body>
+                                                          <h2>Happiness by Country</h2>
+                                                          <table>
+                                                          <tr><th>Country</th><th>Preference</th></tr>
+                                                  """;
+            StringBuilder chart = new StringBuilder();
+            for (Map.Entry<String, Double> entry : calcHappinessByOrigin(List.of(CarBrand.values())).entrySet()) {
+                chart.append("<tr><td>")
+                        .append(entry.getKey())
+                        .append("</td><td>")
+                        .append("#".repeat((int)(entry.getValue() * 100)))
+                        .append("</td></tr>");
+                chart.append("\n");
+            }
+            String htmlContentEnd = """
+                                                    </table>
+                                                </body>
+                                            </html>
+                                            """;
+            
+            String htmlContent = htmlContentStart + chart.toString() + htmlContentEnd ;
+            Files.writeString(Paths.get("happiness_chart.html"), htmlContent);
+        } catch (IOException ex) {
+            Logger.getLogger(Java21Toys.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        return chart.toString();
     }
 
     record BrandPreferenceOrigin (CarBrand brand, double preference, String origin) {

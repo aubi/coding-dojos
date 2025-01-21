@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- *
  * @author Petr Aubrecht <aubrecht@asoftware.cz>
  */
 public class Java21Toys {
@@ -40,11 +39,8 @@ public class Java21Toys {
     }
 
     public static double calcHappiness(List<CarBrand> brands) {
-        double happiness = 0.0;
-        for (CarBrand brand : brands) {
-            happiness += calcPreference(brand);
-        }
-
-        return happiness;
+        return brands.stream()
+                .mapToDouble(Java21Toys::calcPreference)
+                .sum();
     }
 }

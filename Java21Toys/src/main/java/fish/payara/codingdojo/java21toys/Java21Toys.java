@@ -6,6 +6,8 @@ package fish.payara.codingdojo.java21toys;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author Petr Aubrecht <aubrecht@asoftware.cz>
@@ -16,6 +18,10 @@ public class Java21Toys {
         System.out.println("Hello World!");
         calcPreference(null);
         System.out.println(calcHappiness(Arrays.asList(CarBrand.values())));
+
+        System.out.println("Happiness by country");
+        Map<String, Double> happyByOrigin = calcHappinessByOrigin(Arrays.stream(CarBrand.values()).toList());
+        System.out.println(happyByOrigin);
     }
 
     public static double calcPreference(CarBrand brand) {
@@ -38,9 +44,17 @@ public class Java21Toys {
         };
     }
 
-    public static double calcHappiness(List<CarBrand> brands) {
+    public static Double calcHappiness(List<CarBrand> brands) {
         return brands.stream()
                 .mapToDouble(Java21Toys::calcPreference)
                 .sum();
+    }
+
+    public static Map<String, Double> calcHappinessByOrigin(List<CarBrand> brands) {
+        return brands.stream()
+                .collect(Collectors.groupingBy(
+                        Java21Toys::determineOrigin,
+                        Collectors.summingDouble(Java21Toys::calcPreference)
+                ));
     }
 }

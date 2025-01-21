@@ -4,6 +4,7 @@
 
 package fish.payara.codingdojo.java21toys;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -15,6 +16,7 @@ public class Java21Toys {
     public static void main(String[] args) {
         System.out.println("Hello World!");
         calcPreference(null);
+        System.out.println(calcHappiness(Arrays.asList(CarBrand.values())));
     }
 
     public static double calcPreference(CarBrand brand) {

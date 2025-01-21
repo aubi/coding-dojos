@@ -26,7 +26,7 @@ public class Java21Toys {
         System.out.println("Happiness by country");
         Map<String, Double> happyByOrigin = calcHappinessByOrigin(Arrays.stream(CarBrand.values()).toList());
         System.out.println(happyByOrigin);
-    
+
         System.out.println("Selected Happiness by country");
         Map<String, Double> selectedHappinessByOrigin = calcHappinessByOriginSelected(Arrays.stream(CarBrand.values()).toList());
         System.out.println(selectedHappinessByOrigin);
@@ -94,39 +94,42 @@ public class Java21Toys {
                 ));
     }
 
-    public static void happinessByCountryChart () {
+    public static void happinessByCountryChart() {
         try {
-            String htmlContentStart = """
-                                                  <html>
-                                                     <body>
-                                                          <h2>Happiness by Country</h2>
-                                                          <table>
-                                                          <tr><th>Country</th><th>Preference</th></tr>
-                                                  """;
+            String htmlContentStart
+                    = """
+                    <html>
+                       <body>
+                            <h2>Happiness by Country</h2>
+                            <table>
+                            <tr><th>Country</th><th>Preference</th></tr>
+                    """;
             StringBuilder chart = new StringBuilder();
             for (Map.Entry<String, Double> entry : calcHappinessByOrigin(List.of(CarBrand.values())).entrySet()) {
                 chart.append("<tr><td>")
                         .append(entry.getKey())
                         .append("</td><td>")
-                        .append("#".repeat((int)(entry.getValue() * 100)))
+                        .append("#".repeat((int) (entry.getValue() * 100)))
                         .append("</td></tr>");
                 chart.append("\n");
             }
-            String htmlContentEnd = """
-                                                    </table>
-                                                </body>
-                                            </html>
-                                            """;
-            
-            String htmlContent = htmlContentStart + chart.toString() + htmlContentEnd ;
+            String htmlContentEnd
+                    = """
+                            </table>
+                        </body>
+                    </html>
+                    """;
+
+            String htmlContent = htmlContentStart + chart.toString() + htmlContentEnd;
             Files.writeString(Paths.get("happiness_chart.html"), htmlContent);
         } catch (IOException ex) {
             Logger.getLogger(Java21Toys.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    record BrandPreferenceOrigin (CarBrand brand, double preference, String origin) {
-        public static BrandPreferenceOrigin of (CarBrand brand) {
+    record BrandPreferenceOrigin(CarBrand brand, double preference, String origin) {
+
+        public static BrandPreferenceOrigin of(CarBrand brand) {
             return new BrandPreferenceOrigin(brand, Java21Toys.calcPreference(brand), Java21Toys.determineOrigin(brand));
         }
     }

@@ -1,7 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-
 package fish.payara.codingdojo.java21toys;
 
 import java.util.Arrays;
@@ -22,25 +21,39 @@ public class Java21Toys {
         System.out.println("Happiness by country");
         Map<String, Double> happyByOrigin = calcHappinessByOrigin(Arrays.stream(CarBrand.values()).toList());
         System.out.println(happyByOrigin);
+    
+         System.out.println("Selected Happiness by country");
+        Map<String, Double> selectedHappinessByOrigin = calcHappinessByOriginSelected(Arrays.stream(CarBrand.values()).toList());
+        System.out.println(selectedHappinessByOrigin);
     }
 
     public static double calcPreference(CarBrand brand) {
         return switch (brand) {
-            case AUDI, SKODA -> 0.3;
-            case VW -> 0.9;
-            case TESLA -> 1.0;
-            case FIAT -> 0.02;
-            case PORSCHE -> 0.8;
-            case null -> 0;
+            case AUDI, SKODA ->
+                0.3;
+            case VW ->
+                0.9;
+            case TESLA ->
+                1.0;
+            case FIAT ->
+                0.02;
+            case PORSCHE ->
+                0.8;
+            case null ->
+                0;
         };
     }
 
     public static String determineOrigin(CarBrand brand) {
         return switch (brand) {
-            case AUDI, SKODA, VW, PORSCHE -> "Germany";
-            case TESLA -> "USA";
-            case FIAT -> "Italy";
-            case null -> "Nowhere";
+            case AUDI, SKODA, VW, PORSCHE ->
+                "Germany";
+            case TESLA ->
+                "USA";
+            case FIAT ->
+                "Italy";
+            case null ->
+                "Nowhere";
         };
     }
 
@@ -50,6 +63,17 @@ public class Java21Toys {
                 .sum();
     }
 
+    public static Map<String, Double> calcHappinessByOriginSelected(List<CarBrand> brands) {
+        return brands.stream()
+                .map(brand -> new BrandPreferenceOrigin(brand, calcPreference(brand), determineOrigin(brand)))
+                .filter(bpo -> bpo.getPreference() > .5)
+                .filter(bpo -> bpo.getOrigin().equals("Germany") || bpo.getOrigin().equals("USA"))
+                .collect(Collectors.groupingBy(
+                        BrandPreferenceOrigin::getOrigin,
+                        Collectors.summingDouble(BrandPreferenceOrigin::getPreference)
+                ));
+    }
+
     public static Map<String, Double> calcHappinessByOrigin(List<CarBrand> brands) {
         return brands.stream()
                 .collect(Collectors.groupingBy(
@@ -57,4 +81,47 @@ public class Java21Toys {
                         Collectors.summingDouble(Java21Toys::calcPreference)
                 ));
     }
+}
+
+class BrandPreferenceOrigin {
+
+    private CarBrand brand;
+    private double preference;
+    private String origin;
+
+    public BrandPreferenceOrigin(CarBrand brand, double preference) {
+        this.brand = brand;
+        this.preference = preference;
+    }
+
+    public BrandPreferenceOrigin(CarBrand brand, double preference, String origin) {
+        this.brand = brand;
+        this.preference = preference;
+        this.origin = origin;
+    }
+
+    public CarBrand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(CarBrand brand) {
+        this.brand = brand;
+    }
+
+    public double getPreference() {
+        return preference;
+    }
+
+    public void setPreference(double preference) {
+        this.preference = preference;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
 }

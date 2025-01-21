@@ -12,15 +12,17 @@ public class Java21Toys {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
+        calcPreference(null);
     }
 
-    public double calcPreference(CarBrand brand) {
+    public static double calcPreference(CarBrand brand) {
         return switch (brand) {
-            case AUDI -> 0.3;
+            case AUDI, SKODA -> 0.3;
             case VW -> 0.9;
             case TESLA -> 1.0;
             case FIAT -> 0.02;
             case PORSCHE -> 0.8;
+            case null -> 0;
         };
     }
 }

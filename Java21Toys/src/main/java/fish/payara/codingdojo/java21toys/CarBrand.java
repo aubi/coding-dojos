@@ -9,5 +9,5 @@ package fish.payara.codingdojo.java21toys;
  * @author Petr Aubrecht <aubrecht@asoftware.cz>
  */
 public enum CarBrand {
-    PORSCHE, VW, AUDI, FIAT, TESLA
+    PORSCHE, VW, AUDI, FIAT, TESLA, SKODA;
 }

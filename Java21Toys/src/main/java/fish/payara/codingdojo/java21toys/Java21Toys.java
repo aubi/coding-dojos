@@ -25,4 +25,13 @@ public class Java21Toys {
             case null -> 0;
         };
     }
+
+    public static String determineOrigin(CarBrand brand) {
+        return switch (brand) {
+            case AUDI, SKODA, VW, PORSCHE -> "Germany";
+            case TESLA -> "USA";
+            case FIAT -> "Italy";
+            case null -> "Nowhere";
+        };
+    }
 }

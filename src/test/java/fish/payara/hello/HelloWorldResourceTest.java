@@ -16,6 +16,10 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.io.File;
 import java.net.URL;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Arquillian.class)
@@ -26,8 +30,7 @@ public class HelloWorldResourceTest {
     @Deployment(testable = false)
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
-                .addClass(HelloWorldResource.class)
-                .addClass(RestConfiguration.class)
+                .addPackages(true, RestConfiguration.class.getPackage())
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"));
     }
     
@@ -49,6 +52,23 @@ public class HelloWorldResourceTest {
         String responseBody = response.readEntity(String.class);
         assertEquals("John", responseBody);
 
+        client.close();
+    }
+
+    @Test
+    public void testChristmas () {
+        String baseUrl = deploymentUrl.toString();
+
+        ZonedDateTime start = ZonedDateTime.of(2025, 1, 1, 0, 0, 0, 0, ZoneId.systemDefault());
+        Client client = ClientBuilder.newClient();
+        Response response = client.target(baseUrl + "resources/hello/christmas")
+            .queryParam("date", start.format(DateTimeFormatter.ISO_DATE_TIME))
+            .request(MediaType.TEXT_PLAIN)
+            .get();
+
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+        String responseBody = response.readEntity(String.class);
+        assertEquals("30931200", responseBody);
         client.close();
     }
 }

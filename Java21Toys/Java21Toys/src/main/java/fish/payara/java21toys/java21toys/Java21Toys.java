@@ -10,6 +10,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Path;
+import java.util.List;
 
 /**
  *
@@ -29,6 +30,17 @@ public class Java21Toys {
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             System.out.println(response.body());
+            List<StateData> data = response.body()
+                .lines()
+                .skip(1)
+                .map(line -> {
+                    List<String> split = List.of(line.split(" "));
+                    return new StateData(
+                        split.get(0),
+                        Integer.parseInt(split.get(1)),
+                        Integer.parseInt(split.get(2)), Integer.parseInt(split.get(3)), Integer.parseInt(split.get(4)), Integer.parseInt(split.get(5)), Integer.parseInt(split.get(6)));
+                }).toList();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

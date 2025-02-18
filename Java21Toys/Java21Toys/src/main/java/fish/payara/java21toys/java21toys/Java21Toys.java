@@ -9,10 +9,10 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 
 /**
- *
  * @author Gaurav Gupta
  */
 public class Java21Toys {
@@ -30,12 +30,20 @@ public class Java21Toys {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             System.out.println(response.body());
             List<StateData> data = response.body()
-                .lines()
-                .skip(1)
+                    .lines()
+                    .skip(1)
                     .map(line -> parseTSV(line))
                     .toList();
 
+            IntSummaryStatistics stats = data.stream()
+                    .filter(n -> n.apportionment2020() != null)
+                    .mapToInt(StateData::apportionment2020)
+                    .summaryStatistics();
+
             System.out.println(data);
+            System.out.println("Apportion min - " + stats.getMin());
+            System.out.println("Apportion max - " + stats.getMax());
+            System.out.println("Apportion avg - " + stats.getAverage());
         } catch (Exception e) {
             e.printStackTrace();
         }

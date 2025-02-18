@@ -9,6 +9,7 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.file.Path;
 
 /**
  *
@@ -17,9 +18,20 @@ import java.net.http.HttpResponse;
 public class Java21Toys {
 
     public static void main(String[] args) throws URISyntaxException {
-        String url = "http://petr.aubrecht.net/work/cd/apportionment-2020-tableA.csv";
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder(new URI(url)).GET().build();
-        client.send(request, (res) -> {});
+        String url = "https://petr.aubrecht.net/work/cd/apportionment-2020-tableA.csv";
+
+        try {
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println(response.body());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

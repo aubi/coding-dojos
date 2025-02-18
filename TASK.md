@@ -6,7 +6,7 @@ Petr shared some voting data:
 http://petr.aubrecht.net/work/cd/apportionment-2020-tableA.csv
 
 Source
-https://www.census.gov/population/www/socdemo/voting.html
+https://www.census.gov/data/tables/2020/dec/2020-apportionment-data.html
 
 ### HttpClient
 

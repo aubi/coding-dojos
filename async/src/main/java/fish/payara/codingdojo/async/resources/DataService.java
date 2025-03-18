@@ -26,7 +26,7 @@ public class DataService {
         processData(data);
     }
     
-    private void processData(Data data) {
+    public void processData(Data data) {
         try {
             Thread.sleep(Duration.ofSeconds(10));
         } catch (InterruptedException ex) {

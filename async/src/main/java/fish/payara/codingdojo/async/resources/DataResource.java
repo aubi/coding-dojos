@@ -9,6 +9,8 @@ import jakarta.annotation.Resource;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.concurrent.ManagedExecutorService;
 import jakarta.inject.Inject;
+import jakarta.jms.JMSContext;
+import jakarta.jms.Queue;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 
@@ -35,5 +37,15 @@ public class DataResource {
     @POST
     public void execStoreData(Data data) {
         execService.execute(() -> service.execProcessData(data));
+    }
+
+    @Inject
+    JMSContext ctx;
+    @Resource(lookup = "java:global/queue/msgQueue")
+    Queue queue;
+    @Path("/jms")
+    @POST
+    public void message(Data data) {
+        ctx.createProducer().send(queue, data);
     }
 }

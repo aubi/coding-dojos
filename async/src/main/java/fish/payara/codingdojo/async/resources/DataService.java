@@ -5,6 +5,7 @@
 package fish.payara.codingdojo.async.resources;
 
 import fish.payara.codingdojo.async.resources.model.Data;
+import jakarta.ejb.Asynchronous;
 import jakarta.ejb.Stateless;
 import java.time.Duration;
 import java.util.logging.Level;
@@ -16,6 +17,7 @@ import java.util.logging.Logger;
  */
 @Stateless
 public class DataService {
+    @Asynchronous
     public void processData(Data data) {
         try {
             Thread.sleep(Duration.ofSeconds(10));

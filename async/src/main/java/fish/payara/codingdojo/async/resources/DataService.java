@@ -18,7 +18,15 @@ import java.util.logging.Logger;
 @Stateless
 public class DataService {
     @Asynchronous
-    public void processData(Data data) {
+    public void asynProcessData(Data data) {
+        processData(data);
+    }
+    
+    public void execProcessData(Data data) {
+        processData(data);
+    }
+    
+    private void processData(Data data) {
         try {
             Thread.sleep(Duration.ofSeconds(10));
         } catch (InterruptedException ex) {

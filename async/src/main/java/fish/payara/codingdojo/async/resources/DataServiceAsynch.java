@@ -1,27 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package fish.payara.codingdojo.async.resources;
 
 import fish.payara.codingdojo.async.resources.model.Data;
-import jakarta.ejb.Asynchronous;
-import jakarta.ejb.Stateless;
+import jakarta.enterprise.concurrent.Asynchronous;
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
 /**
- * EJB asynchronous sample.
+ * Attempt with the Asynchronous annotation.
  *
  * @author Petr Aubrecht <aubrecht@asoftware.cz>
  */
-@Stateless
-public class DataService {
+public class DataServiceAsynch {
 
-    private static Logger log = Logger.getLogger(DataService.class.getName());
+    private static Logger log = Logger.getLogger(DataServiceAsynch.class.getName());
 
     @Asynchronous
-    public void asynProcessData(Data data) {
+    public CompletableFuture<Long> asynProcessData(Data data) {
         processData(data);
+        return Asynchronous.Result.complete(data.sourceId());
     }
     
     public void processData(Data data) {

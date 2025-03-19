@@ -23,7 +23,10 @@ public class DataResource {
 
     @EJB
     private DataService service;
-    
+
+    @Inject
+    private DataServiceAsynch serviceAsynch;
+
     @Resource
     private ManagedExecutorService execService;
     
@@ -33,16 +36,25 @@ public class DataResource {
         service.asynProcessData(data);
     }
     
+    @Path("/asyncConc")
+    @POST
+    public void asynStoreDataConc(Data data) {
+        serviceAsynch.asynProcessData(data)
+                .thenAccept((l) -> {
+                });
+    }
+
     @Path("/exec")
     @POST
     public void execStoreData(Data data) {
-        execService.execute(() -> service.execProcessData(data));
+        execService.execute(() -> service.processData(data));
     }
 
     @Inject
-    JMSContext ctx;
+    private JMSContext ctx;
     @Resource(lookup = "java:global/queue/msgQueue")
-    Queue queue;
+    private Queue queue;
+
     @Path("/jms")
     @POST
     public void message(Data data) {

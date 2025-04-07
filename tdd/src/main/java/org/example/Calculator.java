@@ -13,7 +13,11 @@ public class Calculator {
         return (double) numerator / denominator;
     }
 
-    public static int multiply (int value1, int value2) {
+    public static double multiply (int value1, int value2) {
        return value1 * value2;
+    }
+
+    public static double douleMultiply (double value1, double value2) {
+        return value1 * value2;
     }
 }

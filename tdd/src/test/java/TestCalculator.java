@@ -35,5 +35,7 @@ public class TestCalculator {
     @Test
     public void multiplyAndDivide () {
         int n1 = 10;
+        double n2 = Calculator.divide(n1, 3);
+        Assert.assertEquals(10,Calculator.douleMultiply(n2,3), 0.001);
     }
 }

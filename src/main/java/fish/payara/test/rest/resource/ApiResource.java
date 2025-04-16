@@ -10,5 +10,7 @@ public class ApiResource {
     
     @GET
     @Produces("text/plain")
-    public String getSquare(@PathParam("number") String number) {}
+    public int getSquare(@PathParam("number") int number) {
+        return number * number;
+    }
 }

@@ -7,9 +7,10 @@ import jakarta.ws.rs.Produces;
 
 @Path("/numbers")
 public class ApiResource {
-    
+
     @GET
     @Produces("text/plain")
+    @Path("{number}")
     public int getSquare(@PathParam("number") int number) {
         return number * number;
     }

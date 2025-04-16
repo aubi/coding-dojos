@@ -1,4 +1,4 @@
-package fish.payara.test.rest.config;
+package fish.payara.test.rest;
 
 import jakarta.ws.rs.ApplicationPath;
 

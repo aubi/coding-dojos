@@ -8,7 +8,7 @@ import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.core.MediaType;
 
-import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Path("/numbers")
 public class ApiResource {
@@ -24,13 +24,16 @@ public class ApiResource {
     @GET
     @Produces("text/plain")
     @Path("/sequence/{number}")
-    public int getSequenceSum (@PathParam("number") int number) {
+    public int getSequenceSum (@PathParam("number") int number) throws InterruptedException, ExecutionException {
         Client client = ClientBuilder.newClient();
         int sum = 0;
         for (int i = 0; i < 5; ++i) {
-            sum += client.target("http://localhost:8080/dojo/api/numbers/" + (number + i))
-                .request(MediaType.TEXT_PLAIN)
-                .get(Integer.class);
+            sum += client.target("http://localhost:8080/coding-dojos/api/numbers/" + (number + i))
+                            .request(MediaType.TEXT_PLAIN)
+                            .rx()
+                            .get(Integer.class)
+                            .toCompletableFuture()
+                            .get();
         }
         return sum;
     }

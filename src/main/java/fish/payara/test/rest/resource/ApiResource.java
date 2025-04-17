@@ -28,8 +28,25 @@ public class ApiResource {
     @Produces("text/plain")
     @Path("{number}")
     public int getSquare(@PathParam("number") int number) throws InterruptedException {
+        System.out.println(">>> calc " + number);
         Thread.sleep(Duration.ofSeconds(1));
+        System.out.println("<<< calc " + number);
         return number * number;
+    }
+
+    @GET
+    @Produces("text/plain")
+    @Path("/sequenceS/{number}")
+    public int getSequenceSumSequential(@PathParam("number") int number) {
+        Client client = ClientBuilder.newClient();
+        int sum = 0;
+        for (int i = 0; i < 50; ++i) {
+            sum += client.target("http://localhost:8080/coding-dojos/api/numbers/" + (number + i))
+                    .request(MediaType.TEXT_PLAIN)
+                    .get(Integer.class);
+            System.out.println("SEQ " + i);
+        }
+        return sum;
     }
 
     @GET
@@ -45,10 +62,12 @@ public class ApiResource {
                     .rx()
                     .get(Integer.class)
                     .toCompletableFuture());
+            System.out.println("RX start " + i);
         }
 
         for (CompletableFuture<Integer> future : futures) {
             sum += future.get();
+            System.out.println("RX end " + future.get());
         }
 
         return sum;

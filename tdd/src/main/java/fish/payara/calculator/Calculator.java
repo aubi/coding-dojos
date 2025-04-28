@@ -1,5 +1,9 @@
-package org.example;
-
+package fish.payara.calculator;
+/**
+    Simple calculator class.
+    <p>
+    This class provides basic arithmetic operations: addition, subtraction, multiplication, and division.
+ */
 public class Calculator {
     public static double add (double value1, double value2) {
         return value1 + value2;

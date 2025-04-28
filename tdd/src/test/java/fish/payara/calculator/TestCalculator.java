@@ -1,4 +1,5 @@
-import org.example.Calculator;
+package fish.payara.calculator;
+
 import org.junit.Assert;
 import org.junit.Test;
 

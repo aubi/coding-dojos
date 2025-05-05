@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         String numbersToExtract = "12,1,4,52,7,8";
 
-        numbersToExtract.split(",");
-        System.out.println(Arrays.toString(numbersToExtract.split(",")));
+        String[] array = numbersToExtract.split(",");
+        System.out.println(Arrays.toString(array));
     }
 }

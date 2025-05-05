@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.IntSummaryStatistics;
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  *  String with numbers seperated by commas
@@ -21,7 +22,12 @@ public class Main {
             numbersToInt.add(Integer.parseInt(number));
         }
 
-        IntSummaryStatistics min = numbersToInt.stream().min();
-        System.out.println(numbersToInt);
+        IntStream intStream = numbersToInt.stream().mapToInt(Integer::intValue);
+
+        IntSummaryStatistics stats = intStream.collect(IntSummaryStatistics::new,
+                IntSummaryStatistics::accept,
+                IntSummaryStatistics::combine);
+
+        System.out.println(stats);
     }
 }

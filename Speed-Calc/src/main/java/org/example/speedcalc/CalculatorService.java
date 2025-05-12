@@ -2,7 +2,11 @@ package org.example.speedcalc;
 
 public class CalculatorService {
 
-    private void calculateSpeedMS() {
+    public double calculateSpeedMS (double pace) {
+        throw new UnsupportedOperationException();
+    }
 
+    public double calculatePace (double speedMS) {
+        throw new UnsupportedOperationException();
     }
 }

@@ -1,5 +1,6 @@
 package org.example.speedcalc;
 
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -7,6 +8,7 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 
 @Named
+@RequestScoped
 public class CalculatorBean implements Serializable {
 
     public double getPace() {
@@ -31,12 +33,12 @@ public class CalculatorBean implements Serializable {
     @Inject
     CalculatorService calculator;
 
-    public double calcSpeed(){
-        return calculator.calculatePaceFromKmPerHour(speed);
+    public void calcPace(){
+        pace = calculator.calculatePaceFromKmPerHour(speed);
     }
 
-    public double calcPace(){
-        return calculator.calculateSpeedKMS(pace);
+    public void calcSpeed(){
+        speed = calculator.calculateSpeedKMS(pace);
     }
 
 

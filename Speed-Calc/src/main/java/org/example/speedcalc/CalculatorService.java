@@ -2,15 +2,15 @@ package org.example.speedcalc;
 
 public class CalculatorService {
 
-    public double calculateSpeedMS (double pace) {
+    public double calculateSpeedKMS(double paceMINKM) {
 
-        throw new UnsupportedOperationException();
+        double speed = 3600 / (pace * 1000.0);
+        return speed;
     }
 
-    public double calculatePace (double speedMS) {
+    public double calculatePaceFromKmPerHour(double speedKMH) {
 
-        double pace = 1/speedMS;
-        double minPerKm = pace * 1000;
-        throw new UnsupportedOperationException();
+        double pace = 3600 / (speedKMH * 1000.0);
+        return pace;
     }
 }

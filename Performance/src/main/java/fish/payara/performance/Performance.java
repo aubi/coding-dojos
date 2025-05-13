@@ -14,6 +14,9 @@ import java.net.URL;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalTime;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  *
@@ -25,22 +28,30 @@ public class Performance {
         URL url = URI.create("http://localhost:8080/hello-world-0.1-SNAPSHOT/").toURL();
 
         long time1 = System.nanoTime();
-        for (int i = 0; i < 1000; ++i) {
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
+        try(ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()) {
+            for (int i = 0; i < 1000; ++i) {
+                executorService.submit(() -> {
+                    try {
+                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        connection.setRequestMethod("GET");
 
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                StringBuilder responseBuilder = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    responseBuilder.append(line);
-                }
-                System.out.println(responseBuilder.toString());
-                //            assertNotNull(responseBuilder);
-                //            assertTrue(responseBuilder.toString()
-                //                    .contains("<html>"));
+                        try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                            StringBuilder responseBuilder = new StringBuilder();
+                            String line;
+                            while ((line = reader.readLine()) != null) {
+                                responseBuilder.append(line);
+                            }
+                        }
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+
         long timeSpent = (System.nanoTime() - time1) / 1000;
         Duration duration = Duration.ofNanos(timeSpent);
         System.out.println("It took " + duration + " seconds");

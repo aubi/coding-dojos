@@ -20,19 +20,24 @@ public class Performance {
 
     public static void main(String[] args) throws MalformedURLException, IOException {
         URL url = URI.create("http://localhost:8080/hello-world/").toURL();
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-            StringBuilder responseBuilder = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                responseBuilder.append(line);
+        long time1 = System.nanoTime();
+        for (int i = 0; i < 1000; ++i) {
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                StringBuilder responseBuilder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    responseBuilder.append(line);
+                }
+                System.out.println(responseBuilder.toString());
+                //            assertNotNull(responseBuilder);
+                //            assertTrue(responseBuilder.toString()
+                //                    .contains("<html>"));
             }
-            System.out.println(responseBuilder.toString());
-//            assertNotNull(responseBuilder);
-//            assertTrue(responseBuilder.toString()
-//                    .contains("<html>"));
         }
+        System.out.println(System.nanoTime() - time1);
     }
 }

@@ -11,6 +11,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalTime;
 
 /**
  *
@@ -19,7 +22,7 @@ import java.net.URL;
 public class Performance {
 
     public static void main(String[] args) throws MalformedURLException, IOException {
-        URL url = URI.create("http://localhost:8080/hello-world/").toURL();
+        URL url = URI.create("http://localhost:8080/hello-world-0.1-SNAPSHOT/").toURL();
 
         long time1 = System.nanoTime();
         for (int i = 0; i < 1000; ++i) {
@@ -38,6 +41,8 @@ public class Performance {
                 //                    .contains("<html>"));
             }
         }
-        System.out.println(System.nanoTime() - time1);
+        long timeSpent = (System.nanoTime() - time1) / 1000;
+        Duration duration = Duration.ofNanos(timeSpent);
+        System.out.println("It took " + duration + " seconds");
     }
 }

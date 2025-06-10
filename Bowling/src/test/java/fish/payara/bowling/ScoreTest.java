@@ -14,10 +14,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ScoreTest {
 
     @Test
-    public void testScoreCalculation() {
-
+    public void testStrikeScoreCalculation() {
         BowlingGame game = new BowlingGame();
+
+        for()
+
         game.totalScore();
         assertEquals(300, game.totalScore());
+    }
+
+    @Test
+    public void testScoreCalculation() {
+        BowlingGame game = new BowlingGame();
+        // test for when there is 3 pins for each roll
+        int[] roll = new int[21];
+
+        for()
+
+        for(int i = 0; i < 10; i++) {
+
+        }
     }
 }

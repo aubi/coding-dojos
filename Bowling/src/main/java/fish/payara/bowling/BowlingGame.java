@@ -17,6 +17,9 @@ public class BowlingGame {
         // add the score for each frame to rolls
         //totalScore = total of rolls
         for (int i = 0; i < currentRoll; i++) {
+            if (currentRoll % 2 == 0) {
+                score += rolls[i];
+            }
             score += rolls[i];
         }
         return score;

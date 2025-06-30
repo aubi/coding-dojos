@@ -1,18 +1,18 @@
 package fish.payara.bowling;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 public class BowlingGame {
 
-    private Frame[] frames = new Frame[10];
+    private List<Frame> frames = new ArrayList<Frame>();
     // aaray for turns
-    private int[] rolls = new int[21];
-    private int currentRoll = 0;
 
     public void roll(int pins) {
-        if (currentRoll % 2 == 0) {
-            
+        if (frames.isEmpty()) {
+            frames.add(new Frame(pins, Optional.empty(), Optional.empty()));
         }
-        rolls[currentRoll] = pins;
-        currentRoll++;
     }
 
     public int calcTotalScore() {

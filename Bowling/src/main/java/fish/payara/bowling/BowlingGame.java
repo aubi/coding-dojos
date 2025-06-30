@@ -6,12 +6,20 @@ import java.util.Optional;
 
 public class BowlingGame {
 
-    private List<Frame> frames = new ArrayList<Frame>();
+    private List<Frame> frames = new ArrayList<>();
     // aaray for turns
 
     public void roll(int pins) {
         if (frames.isEmpty()) {
             frames.add(new Frame(pins, Optional.empty(), Optional.empty()));
+        }
+        else {
+            if (frames.size() == 10 || frames.getLast().roll2().isEmpty()) {
+                frames.set(frames.size() - 1, frames.getLast().addRoll(pins));
+            }
+            else {
+                frames.add(new Frame(pins, Optional.empty(), Optional.empty()));
+            }
         }
     }
 

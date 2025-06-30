@@ -25,4 +25,11 @@ public record Frame (int roll1, Optional<Integer> roll2, Optional<Integer> roll3
     public boolean isStrike () {
         return this.roll1 == 10;
     }
+    
+    public Frame addRoll (int roll) {
+        if (this.roll2.isEmpty()) {
+            return new Frame(this.roll1, Optional.of(roll), this.roll3);
+        }
+        return new Frame(this.roll1, this.roll2, Optional.of(roll));
+    }
 }

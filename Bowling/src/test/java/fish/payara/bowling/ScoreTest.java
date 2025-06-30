@@ -42,4 +42,15 @@ public class ScoreTest {
         }
         assertEquals(10 * 9, game.calcTotalScore());
     }
+
+    @Test
+    public void testSpares() {
+        BowlingGame game = new BowlingGame();
+        for (int i = 0; i < 10; i++) {
+            game.roll(5);
+            game.roll(5);
+        }
+        game.roll(5);
+        assertEquals(10 * 15, game.calcTotalScore());
+    }
 }

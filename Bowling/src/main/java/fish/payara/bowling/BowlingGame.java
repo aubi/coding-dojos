@@ -2,11 +2,15 @@ package fish.payara.bowling;
 
 public class BowlingGame {
 
+    private Frame[] frames = new Frame[10];
     // aaray for turns
     private int[] rolls = new int[21];
     private int currentRoll = 0;
 
     public void roll(int pins) {
+        if (currentRoll % 2 == 0) {
+            
+        }
         rolls[currentRoll] = pins;
         currentRoll++;
     }

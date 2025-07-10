@@ -7,6 +7,9 @@
     <name>Archetype - payarallm</name>
     <url>http://maven.apache.org</url>
 
+    <properties>
+        <maven.compiler.release>21</maven.compiler.release>
+    </properties>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/dev.langchain4j/langchain4j-ollama -->
         <dependency>

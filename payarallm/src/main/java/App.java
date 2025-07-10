@@ -1,4 +1,7 @@
+
+import com.google.gson.Gson;
 import dev.langchain4j.model.ollama.OllamaChatModel;
+import java.util.Map;
 
 import java.util.Scanner;
 
@@ -19,10 +22,10 @@ public class App {
         System.out.println("Press Enter to Country...");
         String country = scanner.nextLine();
 
-        String response2 =
-                client.generate("List five unique cities names which are good for travelling for couples of " + country +
+        String response
+                =                client.generate("List five unique cities names which are good for travelling for couples of " + country +
                         """
-        . Response should be JSON without any additional text in format:
+        . Response should be JSON without any additional text (no text before or after the json) in format:
         {
             "cities": [
                 {city: "city1", description: "description1"},
@@ -30,8 +33,11 @@ public class App {
             ]
         }
         """);
-        System.out.println(response2);
+        System.out.println(response);
+        Map jsonMap = new Gson()
+                .fromJson(response, Map.class);
 
+        System.out.println(jsonMap);
     }
 }
 

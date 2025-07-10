@@ -1,6 +1,7 @@
 
 import com.google.gson.Gson;
 import dev.langchain4j.model.ollama.OllamaChatModel;
+import java.util.List;
 import java.util.Map;
 
 import java.util.Scanner;
@@ -38,6 +39,21 @@ public class App {
                 .fromJson(response, Map.class);
 
         System.out.println(jsonMap);
+        
+        List<Map> cities = (List<Map>)jsonMap.get("cities");
+        System.out.println("cities " + cities);
+        
+        StringBuilder allCitiesInfo = new StringBuilder();
+        for (Map cityObject : cities) {
+            System.out.println("City : " + cityObject.get("city"));
+            System.out.println("Description : " + cityObject.get("description"));
+            String cityWeatherInfo = WeatherApiExample.getWeather((String)cityObject.get("city"));
+            System.out.println("cityWeatherInfo " + cityWeatherInfo);
+            allCitiesInfo.append(cityWeatherInfo);
+        }
+        
+          String finalResponse = client.generate("Select the best city to travel from: " + allCitiesInfo.toString());
+          System.out.println(finalResponse);
     }
 }
 

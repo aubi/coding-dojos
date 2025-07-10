@@ -1,5 +1,3 @@
-package $fish.payara;
-
 /**
  * Hello world!
  *

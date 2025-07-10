@@ -1,17 +1,18 @@
+import dev.langchain4j.model.ollama.OllamaChatModel;
+
 /**
  * Hello world!
- *
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
+public class App {
+    public static void main(String[] args) {
 
-        System.out.println( "Hello World!" );
-        OllamaClient client = new OllamaClient("http://localhost:11434");
+        OllamaChatModel client = OllamaChatModel.builder()
+                .baseUrl("http://localhost:11434")
+                .modelName("llama3:latest")
+                .build();
 
-        String response = client.chat("ollama", "Hello, how are you?");
-
+        String response = client.generate("What is Payara?");
+        System.out.println(response);
     }
 }
 

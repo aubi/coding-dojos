@@ -26,6 +26,35 @@ public class BowlingGame {
 
     public int calcTotalScore() {
         int score = 0;
+        
+        for (int i = 0; i < frames.size(); ++i) {
+            Frame frame = frames.get(i);
+            score += frame.getTotalPins();
+            
+            if (frame.isSpare()) {
+                if (i < frames.size() - 1) {
+                    score += frames.get(i + 1).roll1();
+                }
+                else {
+                    // Final round included already as part of total pins.
+                }
+            }
+            
+            if (frame.isStrike()) {
+                if (i < frames.size() - 1) {
+                    Frame nextFrame = frames.get(i + 1);
+                    score += nextFrame.roll1();
+                    if (nextFrame.roll2().isPresent()) {
+                        score += nextFrame.roll2().get();
+                    }
+                    else if (i < frames.size() - 2) {
+                        Frame nextNextFrame = frames.get(i + 2);
+                        score += nextNextFrame.roll1();
+                    }
+                }
+            }
+        }
+        
         // collect the score for each frame
         // add the score for each frame to rolls
         //totalScore = total of rolls

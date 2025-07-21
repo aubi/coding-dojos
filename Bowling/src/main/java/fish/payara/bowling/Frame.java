@@ -32,4 +32,8 @@ public record Frame (int roll1, Optional<Integer> roll2, Optional<Integer> roll3
         }
         return new Frame(this.roll1, this.roll2, Optional.of(roll));
     }
+    
+    public int getTotalPins () {
+        return this.roll1 + this.roll2.orElse(0) + this.roll3.orElse(0);
+    }
 }

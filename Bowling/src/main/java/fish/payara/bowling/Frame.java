@@ -15,11 +15,11 @@ public record Frame (int roll1, Optional<Integer> roll2, Optional<Integer> roll3
     }
     
     public boolean isSpare () {
-        if (this.roll1 == 0 || (this.roll2.isPresent() && this.roll2.get() == 0)) {
+        if (this.roll1 == 0 || this.roll2.orElse(0) == 0) {
             return false;
         }
         
-        return this.roll1 + this.roll2.get() == 10;
+        return this.roll1 + this.roll2.orElse(0) == 10;
     }
     
     public boolean isStrike () {

@@ -30,9 +30,9 @@ public class Grid {
    4. Any dead cell with exactly three live neighbours becomes a live cell.
      */
 
-    public boolean isDead (int x, int y) {}
-
-    public boolean isAlive (int x, int y) {}
+//    public boolean isDead (int x, int y) {}
+//
+//    public boolean isAlive (int x, int y) {}
 
     public boolean checkNeighbours (int x, int y) {
         int count = 0;
@@ -50,6 +50,10 @@ public class Grid {
             count++;
         }
         return count >= 2;
+    }
+
+    public int returnSize () {
+        return size * size;
     }
 
 }

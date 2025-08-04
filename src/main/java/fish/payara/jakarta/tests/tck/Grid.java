@@ -1,5 +1,7 @@
 package fish.payara.jakarta.tests.tck;
 
+import java.util.List;
+
 public class Grid {
     private final int size;
     private final boolean[][] grid;
@@ -10,11 +12,19 @@ public class Grid {
     }
     
     public boolean get (int x, int y) {
+        if (x < 0 || x >= this.size) {
+            return false;
+        }
+        if (y < 0 || y >= this.size) {
+            return false;
+        }
         return this.grid[x][y];
     }
     
     public void put (int x, int y, boolean value) {
-        this.grid[x][y] = value;
+        if (x >= 0 && x < this.size && y > 0 && y < this.size) {
+            this.grid[x][y] = value;
+        }
     }
 
 
@@ -51,9 +61,24 @@ public class Grid {
         }
         return count >= 2;
     }
+    
+    public List<Boolean> getNeighbours (int x, int y) {
+        return List.of(
+            this.get(x + 1, y),
+            this.get(x - 1, y),
+            this.get(x, y + 1),
+            this.get(x, y - 1)
+        );
+    }
 
     public int returnSize () {
         return size * size;
     }
 
+    public void executeRules (int x, int y) {
+        List<Boolean> neighbours = this.getNeighbours(x, y);
+        if (neighbours.stream().filter(neighbour -> neighbour).count() < 2) {
+            this.put(x, y, false);
+        }
+    }
 }

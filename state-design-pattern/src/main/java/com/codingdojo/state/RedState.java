@@ -1,13 +1,16 @@
 package com.codingdojo.state;
 
+import com.codingdojo.context.TrafficLightContext;
+
 public class RedState implements State {
+
     @Override
-    public void setState (String state) {
-        
+    public String getColors () {
+        return "Red";
     }
 
     @Override
-    public String getState () {
-        return "Red";
+    public State nextState () {
+        return TrafficLightContext.GREEN;
     }
 }

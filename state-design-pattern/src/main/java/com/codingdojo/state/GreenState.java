@@ -5,11 +5,6 @@ import com.codingdojo.context.TrafficLightContext;
 public class GreenState implements State {
 
     @Override
-    public void setState(String state) {
-
-    }
-
-    @Override
     public String getColors() {
         return "Green";
     }

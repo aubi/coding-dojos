@@ -24,7 +24,7 @@ public class Main {
         for (int i = 1; i <= 5; i++) {
             System.out.println("Current Colors: " + trafficLightContext.getState().getColors());
             trafficLightContext.changeState();
-            System.out.println("I can go: " + trafficLightContext.getState().canIGo() + " in color:" + trafficLightContext.getState().getColors());
+            System.out.println("I can go: " + trafficLightContext.canIGo() + " in color:" + trafficLightContext.getState().getColors());
         }
     }
 }

@@ -29,9 +29,7 @@ public class TrafficLightContext {
         currentState = GREEN;
     }
 
-    public enum TrafficColor {
-        RED,
-        YELLOW,
-        GREEN
+    public boolean canIGo() {
+        return this.currentState.canIGo();
     }
 }

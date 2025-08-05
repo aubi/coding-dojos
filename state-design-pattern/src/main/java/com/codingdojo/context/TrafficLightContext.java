@@ -8,33 +8,25 @@ import com.codingdojo.state.TrafficLight;
 import com.codingdojo.state.YellowState;
 
 public class TrafficLightContext implements TrafficLight {
-    private static final State RED = new RedState();
-    private static final State YELLOW = new YellowState();
-    private static final State GREEN = new GreenState();
-    private static final State RED_YELLOW = new RedYellowState();
-    private static final State[] SEQUENCE = new State[] {GREEN, YELLOW, RED, RED_YELLOW};
-    private int index = 0;
+    public static final State RED = new RedState();
+    public static final State YELLOW = new YellowState();
+    public static final State GREEN = new GreenState();
+    public static final State RED_YELLOW = new RedYellowState();
     
     private State currentState;
 
-    @Override
-    public String getState() {
-        return this.currentState.getState();
+    public State getState() {
+        return currentState;
     }
 
     @Override
     public void changeState() {
-        ++this.index;
-        if (this.index >= SEQUENCE.length) {
-            this.index = 0;
-        }
-        this.currentState = SEQUENCE[index];
+        currentState = currentState.nextState();
     }
 
     @Override
     public void reset() {
-        this.currentState = GREEN;
-        this.index = 0;
+        currentState = GREEN;
     }
 
     public enum TrafficColor {

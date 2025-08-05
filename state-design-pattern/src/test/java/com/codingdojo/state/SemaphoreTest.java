@@ -18,13 +18,17 @@ public class SemaphoreTest {
     public void test1Pass() {
         TrafficLightContext semaphore = new TrafficLightContext();
         assertEquals("semaphore starts with green", TrafficLightContext.GREEN, semaphore.getState());
+        assertEquals("green means GO", true, semaphore.getState().canIGo());
 
         semaphore.changeState();
+        assertEquals("Yellow means STOP", false, semaphore.getState().canIGo());
+
         semaphore.changeState();
+        assertEquals("Red means STOP", false, semaphore.getState().canIGo());
+
         semaphore.changeState();
-//        semaphore.changeState();
         assertEquals("semaphore is green after 4 changes", TrafficLightContext.GREEN, semaphore.getState());
+        assertEquals("green means GO", true, semaphore.getState().canIGo());
 
-//        assertEquals("green means GO", true, semaphore.getState().canIGo());
     }
 }

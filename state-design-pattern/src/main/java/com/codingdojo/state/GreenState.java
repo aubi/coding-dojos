@@ -13,4 +13,9 @@ public class GreenState implements State {
     public State nextState() {
         return TrafficLightContext.YELLOW;
     }
+
+    @Override
+    public boolean canIGo() {
+        return true;
+    }
 }

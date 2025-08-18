@@ -44,7 +44,7 @@ public class Grid {
 //
 //    public boolean isAlive (int x, int y) {}
 
-    public boolean checkNeighbours (int x, int y) {
+    public Integer checkNeighbours (int x, int y) {
         int count = 0;
         //go thru each row at a time
         if (this.grid[x-1][y]) {
@@ -59,7 +59,7 @@ public class Grid {
         if (this.grid[x][y+1]) {
             count++;
         }
-        return count >= 2;
+        return count;
     }
     
     public List<Boolean> getNeighbours (int x, int y) {
@@ -75,14 +75,24 @@ public class Grid {
         return size * size;
     }
 
-    public void executeRules (int x, int y) {
+    public boolean executeRules (int x, int y) {
         List<Boolean> neighbours = this.getNeighbours(x, y);
         if (neighbours.stream().filter(neighbour -> neighbour).count() < 2) {
-            this.put(x, y, false);
+            return false;
         }
+        return true;
     }
 
-    public void nextGeneration() {
+    public Grid nextGeneration() {
+        Grid nextGeneration = new  Grid(size);
 
+        // iterate through grid and check each cell
+        for (int x = 0; x < size; x++ ) {
+            for (int y = 0; y < size; y++){
+                //check each cell and its neighbours
+                nextGeneration.put(x, y, this.executeRules(x, y));
+            }
+        }
+        return nextGeneration;
     }
 }

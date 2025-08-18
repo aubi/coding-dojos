@@ -27,7 +27,20 @@ public class GameOfLifeTest {
     }
 
     @Test
-    public void testDeadCellSpawnsWithinFourNeighbours() {
+    public void testCellDiesWithoutNeighbours() {
+        Grid grid = new Grid(5);
+
+        grid.put(1, 1, true);
+
+        //Go through a generation
+        grid.nextGeneration();
+
+        // check grid 1,1 to make sure it is false
+        Assert.assertFalse(grid.get(1, 1));
+    }
+
+    @Test
+    public void testCellDiesWithinFourNeighbours() {
         Grid grid = new Grid(5);
 
         //dead cell we are testing with overcrowding
@@ -43,6 +56,72 @@ public class GameOfLifeTest {
 
         // check grid 1,1 to make sure it is false
         Assert.assertFalse(grid.get(1, 1));
+    }
+
+    @Test
+    public void testCellSpawnsWithinFourNeighbours() {
+        Grid grid = new Grid(5);
+
+        //dead cell we are testing with overcrowding
+        grid.put(1, 1, false);
+
+        grid.put(0, 1, true); //left
+        grid.put(2, 1, true); //right
+        grid.put(1, 2, true); //down
+        grid.put(1, 0, true); //up
+
+        //Go through a generation
+        grid.nextGeneration();
+
+        // check grid 1,1 to make sure it is true
+        Assert.assertTrue(grid.get(1, 1));
+    }
+
+    @Test
+    public void testCellSpawnsWithinThreeNeighbours() {
+        Grid grid = new Grid(5);
+
+        //dead cell we are testing with overcrowding
+        grid.put(1, 1, false);
+
+        grid.put(0, 1, true); //left
+        grid.put(2, 1, true); //right
+        grid.put(1, 2, true); //down
+
+        //Go through a generation
+        grid.nextGeneration();
+
+        // check grid 1,1 to make sure it is true
+        Assert.assertTrue(grid.get(1, 1));
+    }
+
+    @Test
+    public void testCellSurvivesWithTwoNeighbours() {
+        Grid grid = new Grid(5);
+
+        grid.put(1, 1, true);
+
+        grid.put(1, 2, true);
+        grid.put(1, 0, true);
+
+        grid.nextGeneration();
+
+        Assert.assertTrue(grid.get(1, 1));
+    }
+
+    @Test
+    public void testCellSurvivesWithThreeNeighbours() {
+        Grid grid = new Grid(5);
+
+        grid.put(1, 1, true);
+
+        grid.put(1, 2, true);
+        grid.put(1, 0, true);
+        grid.put(0, 1, true);
+
+        grid.nextGeneration();
+
+        Assert.assertTrue(grid.get(1, 1));
     }
 
     // Test a grid with all alive cells

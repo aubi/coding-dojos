@@ -19,23 +19,30 @@ public class GameOfLifeTest {
         grid.put(1,1,true);
         grid.put(2,1,true);
 
-        //Go throught a generation
+        //Go through a generation
         grid.nextGeneration();
+
         // check grid 1,1 to make sure it is false
-        Assert.assertEquals(false, grid.get(1,1));
+        Assert.assertFalse(grid.get(1, 1));
     }
 
     @Test
     public void testDeadCellSpawnsWithinFourNeighbours() {
         Grid grid = new Grid(5);
 
+        //dead cell we are testing with overcrowding
         grid.put(1,1,true);
-        grid.put(2,1,true);
 
-        //Go throught a generation
+        grid.put(0,1,true); //left
+        grid.put(2,1,true); //right
+        grid.put(1,2,true); //up
+        grid.put(1,0,true); //down
+
+        //Go through a generation
         grid.nextGeneration();
+
         // check grid 1,1 to make sure it is false
-        Assert.assertEquals(false, grid.get(1,1));
+        Assert.assertFalse(grid.get(1, 1));
     }
 
     // Test a grid with all alive cells

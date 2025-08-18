@@ -81,4 +81,8 @@ public class Grid {
             this.put(x, y, false);
         }
     }
+
+    public void nextGeneration() {
+
+    }
 }

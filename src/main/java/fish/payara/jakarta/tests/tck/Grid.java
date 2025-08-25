@@ -22,7 +22,7 @@ public class Grid {
     }
     
     public void put (int x, int y, boolean value) {
-        if (x >= 0 && x < this.size && y > 0 && y < this.size) {
+        if (x >= 0 && x < this.size && y >= 0 && y < this.size) {
             this.grid[x][y] = value;
         }
     }

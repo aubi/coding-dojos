@@ -57,6 +57,9 @@ public class GameOfLifeTest {
         //Go through a generation
         Grid newGen = grid.nextGeneration();
 
+        // print newGen grid
+        System.out.println(newGen.toString());
+
         // check grid 1,1 to make sure it is false
         Assert.assertFalse(newGen.get(1, 1));
     }

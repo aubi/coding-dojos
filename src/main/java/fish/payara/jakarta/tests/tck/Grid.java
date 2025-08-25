@@ -95,4 +95,15 @@ public class Grid {
         }
         return nextGeneration;
     }
+
+    @Override
+    public String toString() {
+        for  (int x = 0; x < size; x++ ) { //print the x & y along the sides with numbers (maybe) -- do it as decorator
+            for  (int y = 0; y < size; y++ ) {
+                System.out.print(this.grid[x][y] + " ");
+            }
+            System.out.println();
+        }
+        return "";
+    }
 }

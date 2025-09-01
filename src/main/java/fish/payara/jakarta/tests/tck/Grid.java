@@ -99,8 +99,8 @@ public class Grid {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for  (int x = 0; x < size; x++ ) { //print the x & y along the sides with numbers (maybe) -- do it as decorator
-            for  (int y = 0; y < size; y++ ) {
+        for (int y = 0; y < size; y++) { //print the x & y along the sides with numbers (maybe) -- do it as decorator
+            for (int x = 0; x < size; x++) {
                 if (this.grid[x][y]) {
                     builder.append("O");
                 } else {

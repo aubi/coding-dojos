@@ -33,10 +33,10 @@ public class GameOfLifeTest {
         grid.put(1, 1, true);
 
         //Go through a generation
-        grid.nextGeneration();
+        Grid newGen = grid.nextGeneration();
 
         // check grid 1,1 to make sure it is false
-        Assert.assertFalse(grid.get(1, 1));
+        Assert.assertFalse(newGen.get(1, 1));
     }
 
     @Test
@@ -77,10 +77,10 @@ public class GameOfLifeTest {
         grid.put(1, 0, true); //up
 
         //Go through a generation
-        grid.nextGeneration();
+        Grid newGen = grid.nextGeneration();
 
         // check grid 1,1 to make sure it is true
-        Assert.assertTrue(grid.get(1, 1));
+        Assert.assertTrue(newGen.get(1, 1));
     }
 
     @Test

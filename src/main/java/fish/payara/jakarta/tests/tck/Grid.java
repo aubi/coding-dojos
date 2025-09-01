@@ -69,18 +69,18 @@ public class Grid {
             return false;
         }
 //        Any live cell with two or three live neighbours lives on to the next generation.
-        if (cell && neighboursCount >= 2) {
+        if (cell && (neighboursCount == 2 || neighboursCount == 3)) {
             return true;
         }
 //        Any dead cell with exactly three live neighbours becomes a live cell.
-        if (!cell && neighboursCount == 3) {
+        if (!cell && neighboursCount >= 3) {
             return true;
         }
         // Any live cell with more than three live neighbours dies, as if by overcrowding.
         if (cell && neighboursCount > 3) {
             return false;
         }
-        return true;
+        return false;
     }
 
     public Grid nextGeneration() {

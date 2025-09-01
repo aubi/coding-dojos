@@ -34,18 +34,19 @@ public class Grid {
             this.grid[x][y] = value;
         }
     }
-    
-    public List<Boolean> getNeighbours (int x, int y) {
-        return List.of(
-            this.get(x + 1, y),
-            this.get(x - 1, y),
-            this.get(x, y + 1),
-            this.get(x, y - 1),
-            this.get(x + 1, y + 1),
-            this.get(x + 1, y - 1),
-            this.get(x - 1, y + 1),
-            this.get(x - 1, y - 1)
-        );
+
+    public int getLivingNeighbours(int x, int y) {
+        int living = 0;
+
+        for (int dx = -1; dx < 2; ++dx) {
+            for (int dy = -1; dy < 2; ++dy) {
+                if (!(dx == 0 && dy == 0) && this.get(x + dx, y + dy)) {
+                    living++;
+                }
+            }
+        }
+
+        return living;
     }
 
     public int returnSize () {
@@ -53,27 +54,13 @@ public class Grid {
     }
 
     public boolean executeRules (int x, int y) {
-        List<Boolean> neighbours = this.getNeighbours(x, y);
-        long neighboursCount = neighbours.stream().filter(neighbour -> neighbour).count();
+        int neighboursCount = this.getLivingNeighbours(x, y);
         boolean cell = get(x, y);
 
-//        Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
-        if (cell && neighboursCount < 2) {
-            return false;
+        if (cell) {
+            return neighboursCount == 2 || neighboursCount == 3;
         }
-//        Any live cell with two or three live neighbours lives on to the next generation.
-        if (cell && (neighboursCount == 2 || neighboursCount == 3)) {
-            return true;
-        }
-//        Any dead cell with exactly three live neighbours becomes a live cell.
-        if (!cell && neighboursCount >= 3) {
-            return true;
-        }
-        // Any live cell with more than three live neighbours dies, as if by overcrowding.
-        if (cell && neighboursCount > 3) {
-            return false;
-        }
-        return false;
+        return neighboursCount >= 3;
     }
 
     public Grid nextGeneration() {

@@ -130,6 +130,25 @@ public class GameOfLifeTest {
         Assert.assertTrue(grid.get(1, 1));
     }
 
+    @Test
+    public void deadCellsStayDead() {
+        Grid grid = new Grid(5);
+        Grid newGen = grid.nextGeneration();
+        Assert.assertFalse(newGen.get(1, 1));
+    }
+
+    @Test
+    public void stable2x2() {
+        Grid grid = new Grid(5);
+        grid.put(1, 1, true);
+        grid.put(1, 2, true);
+        grid.put(2, 1, true);
+        grid.put(2, 2, true);
+
+        Grid newGen = grid.nextGeneration().nextGeneration().nextGeneration().nextGeneration().nextGeneration();
+        Assert.assertTrue(newGen.get(1, 1));
+    }
+
     // Test a grid with all alive cells
 //    @Test
 //    public void testGenerate

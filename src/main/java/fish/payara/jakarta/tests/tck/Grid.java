@@ -26,24 +26,6 @@ public class Grid {
             this.grid[x][y] = value;
         }
     }
-
-    public Integer checkNeighbours (int x, int y) {
-        int count = 0;
-        //go thru each row at a time
-        if (this.grid[x-1][y]) {
-            count++;
-        }
-        if (this.grid[x+1][y]) {
-            count++;
-        }
-        if (this.grid[x][y-1]) {
-            count++;
-        }
-        if (this.grid[x][y+1]) {
-            count++;
-        }
-        return count;
-    }
     
     public List<Boolean> getNeighbours (int x, int y) {
         return List.of(
@@ -67,7 +49,6 @@ public class Grid {
         long neighboursCount = neighbours.stream().filter(neighbour -> neighbour).count();
         boolean cell = get(x, y);
 
-        // Extract neighbours as variable
 //        Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
         if (cell && neighboursCount < 2) {
             return false;

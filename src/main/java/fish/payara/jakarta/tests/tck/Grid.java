@@ -50,7 +50,11 @@ public class Grid {
             this.get(x + 1, y),
             this.get(x - 1, y),
             this.get(x, y + 1),
-            this.get(x, y - 1)
+            this.get(x, y - 1),
+            this.get(x + 1, y + 1),
+            this.get(x + 1, y - 1),
+            this.get(x - 1, y + 1),
+            this.get(x - 1, y - 1)
         );
     }
 

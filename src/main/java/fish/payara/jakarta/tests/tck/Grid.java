@@ -77,7 +77,18 @@ public class Grid {
 
     public boolean executeRules (int x, int y) {
         List<Boolean> neighbours = this.getNeighbours(x, y);
+        // Extract neighbours as variable
         if (neighbours.stream().filter(neighbour -> neighbour).count() < 2) {
+            return false;
+        }
+        if (neighbours.stream().filter(neighbour -> neighbour).count() >= 2) {
+            return true;
+        }
+        if (neighbours.stream().filter(neighbour -> neighbour).count() == 3) {
+            return true;
+        }
+        // Any live cell with more than three live neighbours dies, as if by overcrowding.
+        if (neighbours.stream().filter(neighbour -> neighbour).count() > 3) {
             return false;
         }
         return true;

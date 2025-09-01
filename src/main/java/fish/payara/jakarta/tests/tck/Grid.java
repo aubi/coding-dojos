@@ -88,7 +88,7 @@ public class Grid {
     }
 
     public Grid nextGeneration() {
-        Grid nextGeneration = new  Grid(size);
+        Grid nextGeneration = new Grid(size);
 
         // iterate through grid and check each cell
         for (int x = 0; x < size; x++ ) {

@@ -2,6 +2,14 @@ package fish.payara.jakarta.tests.tck;
 
 import java.util.List;
 
+/**
+ * Two-dimensional grid of boolean values used to simulate game of life.
+ * <p>
+ * Each cell can be either alive (true) or dead (false).
+ * Class provides methods to simulate generation following rules
+ *
+ * @author Flavio, Rhys, Ismah
+ */
 public class Grid {
     private final int size;
     private final boolean[][] grid;

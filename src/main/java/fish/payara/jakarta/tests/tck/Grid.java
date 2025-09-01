@@ -27,23 +27,6 @@ public class Grid {
         }
     }
 
-
-    /*
-     1. Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
-     x = dead
-     o = alive
-            oxx
-            oxo
-
-   2. Any live cell with more than three live neighbours dies, as if by overcrowding.
-   3. Any live cell with two or three live neighbours lives on to the next generation.
-   4. Any dead cell with exactly three live neighbours becomes a live cell.
-     */
-
-//    public boolean isDead (int x, int y) {}
-//
-//    public boolean isAlive (int x, int y) {}
-
     public Integer checkNeighbours (int x, int y) {
         int count = 0;
         //go thru each row at a time
@@ -77,18 +60,24 @@ public class Grid {
 
     public boolean executeRules (int x, int y) {
         List<Boolean> neighbours = this.getNeighbours(x, y);
+        long neighboursCount = neighbours.stream().filter(neighbour -> neighbour).count();
+        boolean cell = get(x, y);
+
         // Extract neighbours as variable
-        if (neighbours.stream().filter(neighbour -> neighbour).count() < 2) {
+//        Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
+        if (cell && neighboursCount < 2) {
             return false;
         }
-        if (neighbours.stream().filter(neighbour -> neighbour).count() >= 2) {
+//        Any live cell with two or three live neighbours lives on to the next generation.
+        if (cell && neighboursCount >= 2) {
             return true;
         }
-        if (neighbours.stream().filter(neighbour -> neighbour).count() == 3) {
+//        Any dead cell with exactly three live neighbours becomes a live cell.
+        if (!cell && neighboursCount == 3) {
             return true;
         }
         // Any live cell with more than three live neighbours dies, as if by overcrowding.
-        if (neighbours.stream().filter(neighbour -> neighbour).count() > 3) {
+        if (cell && neighboursCount > 3) {
             return false;
         }
         return true;

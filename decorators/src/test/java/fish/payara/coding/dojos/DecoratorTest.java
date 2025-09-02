@@ -20,5 +20,11 @@ public class DecoratorTest {
         assertEquals("HELLO, WORLD! FROM CODING DOJO", stream.getOutput());
     }
 
+    @Test
+    public void testLowerStringContent() {
+        String text = "HELLO, WORLD! FROM CODING DOJO";
+        TextStream stream = new LowerCaseTextStream(new BaseTextStream(text));
+        assertEquals("hello, world! from coding dojo", stream.getOutput());
+    }
 
 }

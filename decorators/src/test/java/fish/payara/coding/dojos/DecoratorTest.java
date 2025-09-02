@@ -27,4 +27,11 @@ public class DecoratorTest {
         assertEquals("hello, world! from coding dojo", stream.getOutput());
     }
 
+    @Test
+    public void testWrapStringContent() {
+        String text = "hello, World! from Coding Dojo";
+        TextStream stream = new TextWrapStream(new BaseTextStream(text), 5);
+        assertEquals("hello\n, Wor\nld! f\nrom C\noding\n Dojo", stream.getOutput());
+    }
+
 }

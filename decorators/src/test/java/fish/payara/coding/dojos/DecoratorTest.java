@@ -34,4 +34,16 @@ public class DecoratorTest {
         assertEquals("hello\n, Wor\nld! f\nrom C\noding\n Dojo", stream.getOutput());
     }
 
+    @Test
+    public void testFrameStringContent() {
+        String text = "hello, World! from Coding Dojo";
+        TextStream stream = new TextFrameStream(new BaseTextStream(text));
+        String verification = """
+                ----------------------------------
+                | hello, World! from Coding Dojo |
+                ----------------------------------
+                """;
+        assertEquals(verification, stream.getOutput());
+    }
+
 }

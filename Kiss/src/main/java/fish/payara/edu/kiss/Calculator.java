@@ -17,9 +17,7 @@ public class Calculator {
         NumberProvider<Integer> provider = new ListNumberProvider<>(numbers);
 
         IterativeCalculationStrategy<Integer> strategy = new IterativeCalculationStrategy<>();
-
-        CalculationContext<Integer> context = new CalculationContext<>(provider, strategy);
-        Optional<Integer> result = context.executeCalculation();
+        Optional<Integer> result = strategy.calculate(numbers);
 
         result.ifPresentOrElse(
                 r -> System.out.println("Result is: " + r),
@@ -60,26 +58,5 @@ class IterativeCalculationStrategy<T extends Number> {
             res += n.intValue();
         }
         return Optional.of(res);
-    }
-}
-
-// Context object coordinating everything
-class CalculationContext<T extends Number> {
-
-    private final NumberProvider<T> provider;
-    private final IterativeCalculationStrategy<T> strategy;
-
-    public CalculationContext(NumberProvider<T> provider, IterativeCalculationStrategy<T> strategy) {
-        this.provider = provider;
-        this.strategy = strategy;
-    }
-
-    public Optional<Integer> executeCalculation() {
-        try {
-            return strategy.calculate(provider.getNumbers());
-        } catch (Exception e) {
-            System.err.println("Error executing calculation: " + e.getMessage());
-            return Optional.empty();
-        }
     }
 }

@@ -14,7 +14,7 @@ public class Calculator {
     public static void main(String[] args) {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
 
-        NumberProviderFactory factory = new DefaultNumberProviderFactory();
+        DefaultNumberProviderFactory factory = new DefaultNumberProviderFactory();
         NumberProvider<Integer> provider = factory.createProvider(numbers);
 
         CalculationStrategy<Integer> strategy = new IterativeCalculationStrategy<>();
@@ -29,15 +29,7 @@ public class Calculator {
     }
 }
 
-// Factory pattern for no real reason
-interface NumberProviderFactory {
-
-    <T extends Number> NumberProvider<T> createProvider(List<T> data);
-}
-
-class DefaultNumberProviderFactory implements NumberProviderFactory {
-
-    @Override
+class DefaultNumberProviderFactory {
     public <T extends Number> NumberProvider<T> createProvider(List<T> data) {
         return new ListNumberProvider<>(data);
     }

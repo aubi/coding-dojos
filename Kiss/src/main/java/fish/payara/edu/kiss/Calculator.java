@@ -13,11 +13,10 @@ public class Calculator {
 
     public static void main(String[] args) {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        
+        NumberProvider<Integer> provider = new ListNumberProvider<>(numbers);
 
-        DefaultNumberProviderFactory factory = new DefaultNumberProviderFactory();
-        NumberProvider<Integer> provider = factory.createProvider(numbers);
-
-        CalculationStrategy<Integer> strategy = new IterativeCalculationStrategy<>();
+        IterativeCalculationStrategy<Integer> strategy = new IterativeCalculationStrategy<>();
 
         CalculationContext<Integer> context = new CalculationContext<>(provider, strategy);
         Optional<Integer> result = context.executeCalculation();
@@ -26,12 +25,6 @@ public class Calculator {
                 r -> System.out.println("Result is: " + r),
                 () -> System.err.println("No result produced")
         );
-    }
-}
-
-class DefaultNumberProviderFactory {
-    public <T extends Number> NumberProvider<T> createProvider(List<T> data) {
-        return new ListNumberProvider<>(data);
     }
 }
 
@@ -56,16 +49,8 @@ class ListNumberProvider<T extends Number> implements NumberProvider<T> {
     }
 }
 
-// Strategy pattern for calculation (unnecessary)
-interface CalculationStrategy<T extends Number> {
-
-    Optional<Integer> calculate(List<T> numbers);
-}
-
 // Only one implementation
-class IterativeCalculationStrategy<T extends Number> implements CalculationStrategy<T> {
-
-    @Override
+class IterativeCalculationStrategy<T extends Number> {
     public Optional<Integer> calculate(List<T> numbers) {
         if (numbers == null || numbers.isEmpty()) {
             return Optional.empty();
@@ -82,9 +67,9 @@ class IterativeCalculationStrategy<T extends Number> implements CalculationStrat
 class CalculationContext<T extends Number> {
 
     private final NumberProvider<T> provider;
-    private final CalculationStrategy<T> strategy;
+    private final IterativeCalculationStrategy<T> strategy;
 
-    public CalculationContext(NumberProvider<T> provider, CalculationStrategy<T> strategy) {
+    public CalculationContext(NumberProvider<T> provider, IterativeCalculationStrategy<T> strategy) {
         this.provider = provider;
         this.strategy = strategy;
     }

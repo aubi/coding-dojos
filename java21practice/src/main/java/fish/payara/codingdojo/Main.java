@@ -1,4 +1,4 @@
-package java.codingdojo;
+package fish.payara.codingdojo;
 
 public class Main {
 

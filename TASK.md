@@ -1,16 +1,16 @@
 Text blocks
 
 switch
-"->", no break
-switch as a value
-enum branches (verifies completeness)
+*  "->", no break
+* switch as a value
+* instanceof where, case null
+* enum branches (verifies completeness)
 records
-as DTO
-equals
-toString
-equals
-hashValue
-add methods, constructors
+* as DTO
+* equals
+* toString
+* hashValue
+* add methods, constructors
 sealed classes (non-sealed)
 patter matching
 instanceof
